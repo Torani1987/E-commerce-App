@@ -1,0 +1,16 @@
+minggu 1
+tema e-commerce 
+buat ui 
+memakai state management getx 
+memakai design pattern mvvm 
+
+pembuatan ui 
+seminggu 
+on boarding mba yulia 
+splash screen dan logo app mas putra
+homepage mas tedi 
+mas rahmat register page sama login page
+detail mas ilham 
+
+fitur aplikasi 
+search bar 
