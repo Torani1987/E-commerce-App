@@ -5,19 +5,20 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkAuth {
-  final String _url = Base_url;
+  final String _url = 'https://api1.sib3.nurulfikri.com';
 
-  var token;
+  String? token;
 
   _getToken() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    token = jsonDecode(localStorage.getString('token')!)['token'];
+    token = jsonDecode(localStorage.getString('token')!);
   }
 
   auth(data, apiURL) async {
     var fullUrl = _url + apiURL;
-    return await http.post(Uri.parse(fullUrl),
+    final response = await http.post(Uri.parse(fullUrl),
         body: jsonEncode(data), headers: _setHeaders());
+    return response;
   }
 
   getData(apiUrl) async {

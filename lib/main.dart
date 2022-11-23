@@ -1,16 +1,15 @@
 import 'package:final_project/model/registerModel.dart';
 import 'package:final_project/view/Login.dart';
 import 'package:final_project/view/Register.dart';
+import 'package:final_project/view/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -25,7 +24,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'montserrat',
         textTheme: const TextTheme(
           titleLarge: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 22, color: Colors.black),
+              fontWeight: FontWeight.w500, fontSize: 22, color: Colors.black),
           bodyMedium: TextStyle(
               fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),
           bodySmall: TextStyle(
@@ -33,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Login(),
+      home: Login(),
     );
   }
 }
@@ -58,6 +57,7 @@ class _CheckAuthState extends State<CheckAuth> {
     if (token != null) {
       if (mounted) {
         setState(() {
+          print("token : $token");
           isAuth = true;
         });
       }
@@ -68,7 +68,7 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = RegisterPage();
+      child = HomePage();
     } else {
       child = Login();
     }
