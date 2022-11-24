@@ -18,8 +18,9 @@ class FetchProduct {
     });
 
     if (response.statusCode == 200) {
-      Map data = jsonDecode(response.body);
-      results = data['data'].map((e) => Product.fromJson(e)).toList();
+      final body = jsonDecode(response.body);
+      data = jsonDecode(jsonEncode(body['data']));
+      results = data.map((e) => Product.fromJson(e)).toList();
       print(data);
     } else {
       print('api error');

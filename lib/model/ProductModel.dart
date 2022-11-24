@@ -3,8 +3,7 @@ import 'dart:convert';
 List<Product> productfromJson(String str) =>
     List<Product>.from(jsonDecode(str).map((x) => Product.fromJson(x)));
 
-String productToJson(List<Product> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String productToJson(Product data) => json.encode(data.toJson());
 
 class Product {
   int? id;
