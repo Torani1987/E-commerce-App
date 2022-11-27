@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:final_project/controller/logincontroller.dart';
+import 'package:get/get.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:final_project/view/Register.dart';
 import 'package:final_project/view/homePage.dart';
@@ -35,113 +36,122 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
+        appBar: AppBar(
+          backgroundColor: Colors.grey,
+        ),
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+            key: _formKey,
+            child: Column(children: [
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    'Sign In',
+                    style: Theme.of(context).textTheme.bodySmall,
+                    textAlign: TextAlign.left,
+                  )),
+              const SizedBox(
+                height: 7,
+              ),
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Text(
                   'Sign In',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.left,
-                )),
-            const SizedBox(
-              height: 7,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Text(
-                'Sign In',
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.left,
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Email', border: OutlineInputBorder()),
-              validator: (emailValue) {
-                if (emailValue!.isEmpty) {
-                  return 'Silahkan Masukkan Email';
-                }
-                email = emailValue;
-                return null;
-              },
-            ),
-            const SizedBox(
-              height: 26,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Password', border: OutlineInputBorder()),
-              validator: (passwordValue) {
-                if (passwordValue!.isEmpty) {
-                  return 'Silahkan Masukkan Password';
-                }
-                password = passwordValue;
-                return null;
-              },
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: Colors.black),
-                child: Text(
-                  _isLoading ? 'Processing..' : 'Login',
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _login();
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.alternate_email),
+                    labelText: 'Email',
+                    border: OutlineInputBorder()),
+                validator: (emailValue) {
+                  if (emailValue!.isEmpty) {
+                    return 'Silahkan Masukkan Email';
                   }
+                  email = emailValue;
+                  return null;
                 },
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
+              const SizedBox(
+                height: 26,
+              ),
+              TextFormField(
+                obscureText: _secureText,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.key),
+                    suffixIcon: IconButton(
+                        onPressed: showHide,
+                        icon: Icon(_secureText
+                            ? Icons.visibility_off
+                            : Icons.visibility)),
+                    labelText: 'Password',
+                    border: OutlineInputBorder()),
+                validator: (passwordValue) {
+                  if (passwordValue!.isEmpty) {
+                    return 'Silahkan Masukkan Password';
+                  }
+                  password = passwordValue;
+                  return null;
+                },
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      backgroundColor: Colors.black),
                   child: Text(
-                    'Not Account Yet ? ',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    _isLoading ? 'Processing..' : 'Login',
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(color: Colors.white),
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterPage()));
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _login();
+                    }
                   },
-                )
-              ],
-            )
-          ]),
-        ),
-      ),
-    );
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    child: Text(
+                      'Not Account Yet ? Register',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage()));
+                    },
+                  )
+                ],
+              )
+            ]),
+          ),
+        ));
   }
 
   void _login() async {
