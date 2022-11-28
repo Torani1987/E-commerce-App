@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:final_project/properties_app/prop.dart';
 import 'package:final_project/view/Register.dart';
-import 'package:final_project/view/homePage.dart';
-import 'package:final_project/view_model/AuthService.dart';
+import 'package:final_project/view/home.dart';
+import 'package:final_project/view/main_page.dart';
+import 'package:final_project/view_model/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
   State<Login> createState() => _LoginState();
 }
@@ -17,6 +20,7 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   String? email, password;
   bool _secureText = true;
+  bool _isHidden = true;
 
   showHide() {
     setState(() {
@@ -31,114 +35,179 @@ class _LoginState extends State<Login> {
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 
-//slicing belum selesai
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(
+          '4SHOP',
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
-          child: Column(children: [
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  'Sign In',
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.left,
-                )),
-            const SizedBox(
-              height: 7,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Text(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Sign In', style: Theme.of(context).textTheme.headlineSmall),
+              const SizedBox(height: 16),
+              Text(
                 'Sign In',
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.left,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.bold, color: Colors.black),
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Email', border: OutlineInputBorder()),
-              validator: (emailValue) {
-                if (emailValue!.isEmpty) {
-                  return 'Silahkan Masukkan Email';
-                }
-                email = emailValue;
-                return null;
-              },
-            ),
-            const SizedBox(
-              height: 26,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Password', border: OutlineInputBorder()),
-              validator: (passwordValue) {
-                if (passwordValue!.isEmpty) {
-                  return 'Silahkan Masukkan Password';
-                }
-                password = passwordValue;
-                return null;
-              },
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: Colors.black),
-                child: Text(
-                  _isLoading ? 'Processing..' : 'Login',
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(color: Colors.white),
+              const SizedBox(height: 16),
+              RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                  text: 'Username',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  children: const [
+                    TextSpan(
+                      text: '*',
+                      style: TextStyle(color: Colors.red),
+                    )
+                  ],
                 ),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                autocorrect: false,
+                autofocus: true,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  labelText: 'Email',
+                  labelStyle: Theme.of(context).textTheme.headlineMedium,
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                validator: (emailValue) {
+                  if (emailValue!.isEmpty) {
+                    return 'Please Enter Your Email';
+                  }
+                  email = emailValue;
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                  text: 'Password',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  children: const [
+                    TextSpan(
+                      text: '*',
+                      style: TextStyle(color: Colors.red),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextFormField(
+                autocorrect: false,
+                autofocus: true,
+                obscureText: _isHidden,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  labelText: 'Password',
+                  labelStyle: Theme.of(context).textTheme.headlineMedium,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isHidden = !_isHidden;
+                      });
+                    },
+                    icon: const Icon(Icons.remove_red_eye_outlined),
+                    color: Colors.grey,
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                validator: (passwordValue) {
+                  if (passwordValue!.isEmpty) {
+                    return 'Please Enter Your Password';
+                  }
+                  password = passwordValue;
+                  return null;
+                },
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _login();
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                ),
+                child: Text(
+                  _isLoading ? 'Processing..' : 'Login',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.copyWith(color: Colors.white),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  child: Text(
-                    'Not Account Yet ? ',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterPage()));
-                  },
-                )
-              ],
-            )
-          ]),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    child: Text(
+                      'Not Account Yet ?',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(decoration: TextDecoration.underline),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()));
+                    },
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -159,7 +228,7 @@ class _LoginState extends State<Login> {
       if (mounted) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const MainPage()),
         );
       }
     } else {

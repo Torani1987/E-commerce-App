@@ -1,15 +1,19 @@
-import 'package:final_project/model/registerModel.dart';
-import 'package:final_project/view/Login.dart';
-import 'package:final_project/view/Register.dart';
-import 'package:final_project/view/homePage.dart';
+import 'package:final_project/view/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:final_project/view/login.dart';
+import 'package:final_project/view/home.dart';
+// import 'package:final_project/model/registerModel.dart';
+// import 'package:final_project/view/Register.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -18,26 +22,37 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // gunakan textstyle ini karna udah saya definisiin jadi tidak perlu membuat textstyke yang baru lagi
+      title: 'E-Commerce Apps',
+      // Gunakan TextTheme sesuai kebutuhan
       theme: ThemeData(
         useMaterial3: true,
-        fontFamily: 'montserrat',
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-              fontWeight: FontWeight.w500, fontSize: 22, color: Colors.black),
-          bodyMedium: TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black),
-          bodySmall: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black),
+        textTheme: TextTheme(
+          titleLarge: GoogleFonts.montserrat(fontSize: 20),
+          titleMedium: GoogleFonts.montserrat(fontSize: 16),
+          titleSmall: GoogleFonts.montserrat(fontSize: 12),
+          headlineLarge: GoogleFonts.hind(fontSize: 20),
+          headlineMedium: GoogleFonts.hind(fontSize: 16),
+          headlineSmall: GoogleFonts.hind(fontSize: 12),
+          bodyLarge: GoogleFonts.montserrat(fontSize: 24),
+          bodySmall: GoogleFonts.montserrat(fontSize: 8),
+          labelLarge: GoogleFonts.hind(fontSize: 24),
+          labelSmall: GoogleFonts.hind(fontSize: 8),
+          // bodyMedium: ,
+          // displayLarge: ,
+          // displayMedium: ,
+          // displaySmall: ,
+          // labelMedium: ,
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: const OnBoarding(),
     );
   }
 }
 
 class CheckAuth extends StatefulWidget {
+  const CheckAuth({super.key});
+
   @override
   _CheckAuthState createState() => _CheckAuthState();
 }
@@ -68,7 +83,7 @@ class _CheckAuthState extends State<CheckAuth> {
   Widget build(BuildContext context) {
     Widget child;
     if (isAuth) {
-      child = HomePage();
+      child = const HomePage();
     } else {
       child = Login();
     }

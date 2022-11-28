@@ -13,10 +13,10 @@ class Register {
     required this.passwordConfirmation,
   });
   Register.fromjson(Map<String, dynamic> json) {
-    this.name = json['name'];
-    this.email = json['email'];
-    this.numberPhone = json['handphone'];
-    this.password = json['password'];
-    this.passwordConfirmation = json['password_confirmation'];
+    name = json['name'];
+    email = json['email'];
+    numberPhone = json['handphone'];
+    password = json['password'];
+    passwordConfirmation = json['password_confirmation'];
   }
 }

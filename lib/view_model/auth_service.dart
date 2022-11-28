@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:final_project/view_model/globalService.dart';
+// import 'package:final_project/view_model/globalService.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
