@@ -155,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               controller: _emailCtrl,
-              autovalidateMode: AutovalidateMode.always,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 final bool isValid = EmailValidator.validate(value!);
                 if (_emailCtrl.text.isEmpty) {
@@ -166,6 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 return null;
               },
             ),
+            const SizedBox(height: 16),
             RichText(
               textAlign: TextAlign.start,
               text: TextSpan(
@@ -325,7 +326,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const SizedBox(height: 32),
             SizedBox(
-              height: 50,
+              height: 45,
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -335,7 +336,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text(
                   _isLoading ? 'Processing..' : 'Register',
                   textDirection: TextDirection.ltr,
-                  style: const TextStyle(color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: Colors.white),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -344,7 +348,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

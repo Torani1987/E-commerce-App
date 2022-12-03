@@ -91,8 +91,10 @@ class _LoginState extends State<Login> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  labelText: 'Email',
-                  labelStyle: Theme.of(context).textTheme.headlineMedium,
+                  hintText: 'Username',
+                  hintStyle: Theme.of(context).textTheme.headlineMedium,
+                  prefixIcon:
+                      const Icon(Icons.alternate_email, color: Colors.grey),
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 ),
@@ -137,8 +139,9 @@ class _LoginState extends State<Login> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  labelText: 'Password',
-                  labelStyle: Theme.of(context).textTheme.headlineMedium,
+                  hintText: 'Password',
+                  hintStyle: Theme.of(context).textTheme.headlineMedium,
+                  prefixIcon: const Icon(Icons.key, color: Colors.grey),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -162,25 +165,27 @@ class _LoginState extends State<Login> {
                 },
               ),
               const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _login();
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                child: Text(
-                  _isLoading ? 'Processing..' : 'Login',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineMedium
-                      ?.copyWith(color: Colors.white),
+              SizedBox(
+                height: 45,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      backgroundColor: Colors.black),
+                  child: Text(
+                    _isLoading ? 'Processing..' : 'Login',
+                    textDirection: TextDirection.ltr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge
+                        ?.copyWith(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _login();
+                    }
+                  },
                 ),
               ),
               const SizedBox(height: 10),
