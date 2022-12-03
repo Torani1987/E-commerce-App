@@ -17,6 +17,7 @@ class IntroOne extends StatelessWidget {
           const SizedBox(height: 32),
           Text(
             'Practically no time to spend on anything',
+            textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .labelLarge

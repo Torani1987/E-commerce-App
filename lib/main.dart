@@ -1,8 +1,8 @@
-import 'package:final_project/view/onboarding.dart';
+import 'package:final_project/view/onboarding_page/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:final_project/view/login.dart';
+import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view/home.dart';
 // import 'package:final_project/model/registerModel.dart';
 // import 'package:final_project/view/Register.dart';
@@ -85,7 +85,7 @@ class _CheckAuthState extends State<CheckAuth> {
     if (isAuth) {
       child = const HomePage();
     } else {
-      child = Login();
+      child = const Login();
     }
 
     return Scaffold(

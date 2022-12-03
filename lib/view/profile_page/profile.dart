@@ -1,9 +1,9 @@
-import 'package:final_project/view/login.dart';
+import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:final_project/view/detail_profile.dart';
+import 'package:final_project/view/profile_page/detail_profile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

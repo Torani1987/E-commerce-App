@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:final_project/view/introduction/intro_one.dart';
-import 'package:final_project/view/introduction/intro_two.dart';
-import 'package:final_project/view/introduction/intro_three.dart';
-import 'package:final_project/view/login.dart';
+import 'package:final_project/view/onboarding_page/component/intro_one.dart';
+import 'package:final_project/view/onboarding_page/component/intro_two.dart';
+import 'package:final_project/view/onboarding_page/component/intro_three.dart';
+import 'package:final_project/view/login_page/login.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -63,7 +63,7 @@ class _OnBoardingState extends State<OnBoarding> {
                               (route) => false);
                         },
                         child: Text(
-                          'Get Started',
+                          'Start',
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge

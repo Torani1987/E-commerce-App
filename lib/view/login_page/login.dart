@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:final_project/properties_app/prop.dart';
-import 'package:final_project/view/Register.dart';
-import 'package:final_project/view/home.dart';
+import 'package:final_project/view/register_page/register.dart';
 import 'package:final_project/view/main_page.dart';
 import 'package:final_project/view_model/auth_service.dart';
 import 'package:flutter/material.dart';
