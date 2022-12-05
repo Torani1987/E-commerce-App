@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:final_project/model/product_model.dart';
 import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view_model/auth_service.dart';
+import 'package:final_project/view_model/cartService.dart';
 import 'package:final_project/view_model/get_product.dart';
+import 'package:final_project/view_model/wishlistService.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: FutureBuilder<List<Product>>(
           future: product.getDataProduct(),
           builder: (context, snapshot) {
@@ -46,6 +49,14 @@ class _HomePageState extends State<HomePage> {
                         data[index].name!,
                         maxLines: 2,
                       ),
+                      trailing: Column(children: [
+                        IconButton(
+                            onPressed: () {
+                              WishlistRepository()
+                                  .addWishlist(data[index].id.toString());
+                            },
+                            icon: Icon(Icons.favorite)),
+                      ]),
                     );
                   }));
             } else {

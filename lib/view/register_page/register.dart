@@ -379,7 +379,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     var data = {
       'name': name,
-      'email': email,
+      'email': _emailCtrl,
       'handphone': noHp,
       'password': password,
       'password_confirmation': passwordConfirm
