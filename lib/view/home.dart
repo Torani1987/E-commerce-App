@@ -1,13 +1,15 @@
 import 'dart:convert';
 
-import 'package:final_project/model/ProductModel.dart';
-import 'package:final_project/view/Login.dart';
-import 'package:final_project/view_model/AuthService.dart';
-import 'package:final_project/view_model/GetProduct.dart';
+import 'package:final_project/model/product_model.dart';
+import 'package:final_project/view/login_page/login.dart';
+import 'package:final_project/view_model/auth_service.dart';
+import 'package:final_project/view_model/get_product.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -16,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   String name = '';
   String usertoken = '';
-  final FetchProduct product = new FetchProduct();
+  final FetchProduct product = FetchProduct();
   void initState() {
     super.initState();
     _loadUserData();

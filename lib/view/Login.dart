@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:final_project/view_model/auth_service.dart';
 import 'package:final_project/controller/logincontroller.dart';
 import 'package:get/get.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:final_project/view/Register.dart';
-import 'package:final_project/view/homePage.dart';
-import 'package:final_project/view_model/AuthService.dart';
+import 'package:final_project/view/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
       if (mounted) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => MainPage()),
         );
       }
     } else {
