@@ -1,15 +1,15 @@
-import 'package:final_project/model/cartModel.dart';
-import 'package:final_project/view_model/cartService.dart';
+import 'package:final_project/model/cart_model.dart';
+import 'package:final_project/view_model/cart_service.dart';
 import 'package:flutter/material.dart';
 
-class cartPage extends StatefulWidget {
-  cartPage({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<cartPage> createState() => _cartPageState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _cartPageState extends State<cartPage> {
+class _CartPageState extends State<CartPage> {
   Cartrepository cartrepository = Cartrepository();
   @override
   void initState() {
@@ -54,12 +54,12 @@ class _cartPageState extends State<cartPage> {
                                 .then((value) => setState(
                                       () {},
                                     )),
-                            icon: Icon(Icons.delete))
+                            icon: const Icon(Icons.delete))
                       ]),
                     );
                   }));
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

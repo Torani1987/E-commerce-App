@@ -1,5 +1,5 @@
 import 'package:final_project/view/cart_page/cart.dart';
-import 'package:final_project/widget/Searchbar.dart';
+import 'package:final_project/widget/searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
 
   List<Widget> body = [
     const HomePage(),
-    WishlistPage(),
+    const WishlistPage(),
     const TransactionPage(),
     const ProfilePage()
   ];
@@ -46,8 +46,8 @@ class _MainPageState extends State<MainPage> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
-              labelText: 'Find Something?',
-              labelStyle: Theme.of(context).textTheme.headlineMedium,
+              hintText: 'Find Something?',
+              hintStyle: Theme.of(context).textTheme.headlineMedium,
               // labelStyle: const TextStyle(color: Colors.black),
               suffixIcon: const Icon(
                 Icons.search,
@@ -57,19 +57,11 @@ class _MainPageState extends State<MainPage> {
             onTap: () {
               showSearch(context: context, delegate: Search());
             }),
-        centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.category_outlined,
-              color: Colors.white,
-            ),
-          ),
-          IconButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => cartPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CartPage()));
             },
             icon: const Icon(
               Icons.shopping_cart_outlined,

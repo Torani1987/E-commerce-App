@@ -1,5 +1,5 @@
-import 'package:final_project/model/wishlistModel.dart';
-import 'package:final_project/view_model/wishlistService.dart';
+import 'package:final_project/model/wishlist_model.dart';
+import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -51,12 +51,12 @@ class _WishlistPageState extends State<WishlistPage> {
                                 .then((value) => setState(
                                       () {},
                                     )),
-                            icon: Icon(Icons.delete))
+                            icon: const Icon(Icons.delete))
                       ]),
                     );
                   }));
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

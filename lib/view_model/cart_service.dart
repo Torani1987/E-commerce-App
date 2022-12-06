@@ -1,14 +1,16 @@
 import 'dart:convert';
 
-import 'package:final_project/model/wishlistModel.dart';
+// import 'package:final_project/global/global_prop.dart';
+// import 'package:final_project/model/category_model.dart';
+import 'package:final_project/model/cart_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart ' as http;
 
-class WishlistRepository {
+class Cartrepository {
   var data = [];
-  List<WishList> results = [];
-  String url = 'https://api1.sib3.nurulfikri.com/api/wishlist';
-  Future<List<WishList>> getDataCart() async {
+  List<CartModel> results = [];
+  String url = 'https://api1.sib3.nurulfikri.com/api/keranjang';
+  Future<List<CartModel>> getDataCart() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final response = await http.get(Uri.parse(url), headers: {
@@ -20,7 +22,7 @@ class WishlistRepository {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       data = jsonDecode(jsonEncode(body['data']));
-      results = data.map((e) => WishList.fromJson(e)).toList();
+      results = data.map((e) => CartModel.fromJson(e)).toList();
       print(data);
     } else {
       print('api error');
@@ -28,10 +30,8 @@ class WishlistRepository {
     return results;
   }
 
-  Future addWishlist(String? id) async {
-    final data = {
-      'product_id': id,
-    };
+  Future addCart(String? id, String? qty) async {
+    final data = {'product_id': id, 'qty': qty};
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final resp = await http.post(Uri.parse(url), body: data, headers: {
@@ -43,7 +43,7 @@ class WishlistRepository {
   }
 
   Future delCart(String? id) async {
-    String delUrl = url + '/$id';
+    String delUrl = '$url/$id';
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final response = await http.delete(Uri.parse(delUrl), headers: {

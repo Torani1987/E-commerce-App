@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:final_project/view_model/auth_service.dart';
-import 'package:final_project/controller/logincontroller.dart';
-import 'package:get/get.dart';
-import 'package:final_project/properties_app/prop.dart';
 import 'package:final_project/view/Register.dart';
 import 'package:final_project/view/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
   State<Login> createState() => _LoginState();
 }
@@ -41,13 +40,11 @@ class _LoginState extends State<Login> {
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Form(
             key: _formKey,
             child: Column(children: [
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Text(
@@ -66,12 +63,12 @@ class _LoginState extends State<Login> {
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(
-                height: 16,
+              const SizedBox(
+                height: 16
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.alternate_email),
                     labelText: 'Email',
                     border: OutlineInputBorder()),
@@ -90,14 +87,14 @@ class _LoginState extends State<Login> {
                 obscureText: _secureText,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.key),
+                    prefixIcon: const Icon(Icons.key),
                     suffixIcon: IconButton(
                         onPressed: showHide,
                         icon: Icon(_secureText
                             ? Icons.visibility_off
                             : Icons.visibility)),
                     labelText: 'Password',
-                    border: OutlineInputBorder()),
+                    border: const OutlineInputBorder()),
                 validator: (passwordValue) {
                   if (passwordValue!.isEmpty) {
                     return 'Silahkan Masukkan Password';
@@ -109,7 +106,7 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 25,
               ),
-              Container(
+              SizedBox(
                 height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
@@ -120,7 +117,7 @@ class _LoginState extends State<Login> {
                   child: Text(
                     _isLoading ? 'Processing..' : 'Login',
                     textDirection: TextDirection.ltr,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -129,7 +126,7 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -144,7 +141,7 @@ class _LoginState extends State<Login> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
+                              builder: (context) => const RegisterPage()));
                     },
                   )
                 ],
@@ -169,7 +166,7 @@ class _LoginState extends State<Login> {
       if (mounted) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainPage()),
+          MaterialPageRoute(builder: (context) => const MainPage()),
         );
       }
     } else {

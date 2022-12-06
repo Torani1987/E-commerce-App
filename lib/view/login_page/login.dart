@@ -6,14 +6,14 @@ import 'package:final_project/view_model/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
   String? email, password;
@@ -178,7 +178,7 @@ class _LoginState extends State<Login> {
                     textDirection: TextDirection.ltr,
                     style: Theme.of(context)
                         .textTheme
-                        .labelLarge
+                        .headlineLarge
                         ?.copyWith(color: Colors.white),
                   ),
                   onPressed: () {
