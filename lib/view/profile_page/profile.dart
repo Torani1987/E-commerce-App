@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => WishlistPage(),
+                      builder: (context) => const WishlistPage(),
                     ),
                   );
                 },
@@ -173,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Login(),
+                        builder: (context) => const LoginPage(),
                       ),
                       (route) => false);
                 },

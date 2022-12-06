@@ -3,11 +3,12 @@ import 'package:final_project/view_model/get_product.dart';
 import 'package:flutter/material.dart';
 
 class Search extends SearchDelegate {
-  @override
   final FetchProduct _productsearch = FetchProduct();
+  
+  @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back_ios),
+      icon: const Icon(Icons.arrow_back_ios),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -16,13 +17,12 @@ class Search extends SearchDelegate {
 
   @override
   List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
     return [
       IconButton(
           onPressed: () {
             query = '';
           },
-          icon: Icon(Icons.close))
+          icon: const Icon(Icons.close))
     ];
   }
 
@@ -32,7 +32,7 @@ class Search extends SearchDelegate {
         future: _productsearch.getDataProduct(query: query),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -45,7 +45,7 @@ class Search extends SearchDelegate {
                   color: Colors.grey,
                   height: 100,
                   width: 100,
-                  child: data[index].image!.toString() != null
+                  child: data[index].image!.isNotEmpty
                       ? Image.network(
                           data[index].image!.toString(),
                           width: 100,
@@ -66,14 +66,13 @@ class Search extends SearchDelegate {
               );
             },
           );
-        }); // TODO: implement buildResults
+        });
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    return Center(
-      child: const Text('Search Your Favorite Item'),
+    return const Center(
+      child: Text('Search Your Favorite Item'),
     );
   }
 }

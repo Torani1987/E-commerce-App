@@ -58,7 +58,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Login(),
+                                builder: (context) => const LoginPage(),
                               ),
                               (route) => false);
                         },
@@ -75,7 +75,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     : GestureDetector(
                         onTap: () {
                           _controller.nextPage(
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             curve: Curves.easeIn,
                           );
                         },
