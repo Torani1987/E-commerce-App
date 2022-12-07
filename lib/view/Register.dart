@@ -3,21 +3,21 @@ import 'package:final_project/view_model/auth_service.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:final_project/view/Login.dart';
 import 'package:final_project/view/home.dart';
+import 'package:final_project/view/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../view_model/auth_service.dart';
-
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  @override
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
-  String? email, password, name, passwordConfirm, no_hp;
+  String? email, password, name, passwordConfirm, noHp;
   bool _secureText = true;
 
   showHide() {
@@ -33,6 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -40,11 +41,11 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       backgroundColor: white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
           key: _formKey,
           child: Column(children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
@@ -65,12 +66,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 textAlign: TextAlign.left,
               ),
             ),
-            SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             TextFormField(
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.person),
                   labelText: 'Nama',
                   border: OutlineInputBorder()),
@@ -87,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.alternate_email),
                   labelText: 'Email',
                   border: OutlineInputBorder()),
@@ -104,15 +103,15 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.call),
                   labelText: 'No Handphone',
                   border: OutlineInputBorder()),
-              validator: (no_hpValue) {
-                if (no_hpValue!.isEmpty) {
+              validator: (noHpValue) {
+                if (noHpValue!.isEmpty) {
                   return 'Silahkan Masukkan No Handphone';
                 }
-                no_hp = no_hpValue;
+                noHp = noHpValue;
                 return null;
               },
             ),
@@ -123,14 +122,14 @@ class _RegisterPageState extends State<RegisterPage> {
               obscureText: _secureText,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.key),
+                  prefixIcon: const Icon(Icons.key),
                   suffixIcon: IconButton(
                       onPressed: showHide,
                       icon: Icon(_secureText
                           ? Icons.visibility_off
                           : Icons.visibility)),
                   labelText: 'Password',
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
               validator: (passwordValue) {
                 if (passwordValue!.isEmpty) {
                   return 'Silahkan Masukkan Password';
@@ -146,14 +145,14 @@ class _RegisterPageState extends State<RegisterPage> {
               obscureText: _secureText,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.key),
+                  prefixIcon: const Icon(Icons.key),
                   suffixIcon: IconButton(
                       onPressed: showHide,
                       icon: Icon(_secureText
                           ? Icons.visibility_off
                           : Icons.visibility)),
                   labelText: 'Konfirmasi Password',
-                  border: OutlineInputBorder()),
+                  border: const OutlineInputBorder()),
               validator: (passwordConfirmValue) {
                 if (passwordConfirmValue!.isEmpty) {
                   return 'Silahkan Masukkan Konfirmasi Password';
@@ -168,7 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: 25,
             ),
-            Container(
+            SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
@@ -179,7 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text(
                   _isLoading ? 'Processing..' : 'Register',
                   textDirection: TextDirection.ltr,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -188,9 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -201,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                        MaterialPageRoute(builder: (context) => const Login()));
                   },
                 )
               ],
@@ -219,7 +216,7 @@ class _RegisterPageState extends State<RegisterPage> {
     var data = {
       'name': name,
       'email': email,
-      'handphone': no_hp,
+      'handphone': noHp,
       'password': password,
       'password_confirmation': passwordConfirm
     };
@@ -230,7 +227,8 @@ class _RegisterPageState extends State<RegisterPage> {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['data']['token']));
       localStorage.setString('user', json.encode(body['data']['user']));
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Login()));
       _showMsg(body['info']);
     }
     setState(() {

@@ -361,8 +361,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         ?.copyWith(decoration: TextDecoration.underline),
                   ),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Login()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
                   },
                 )
               ],
@@ -379,7 +381,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     var data = {
       'name': name,
-      'email': email,
+      'email': _emailCtrl,
       'handphone': noHp,
       'password': password,
       'password_confirmation': passwordConfirm
@@ -392,7 +394,7 @@ class _RegisterPageState extends State<RegisterPage> {
       localStorage.setString('token', json.encode(body['data']['token']));
       localStorage.setString('user', json.encode(body['data']['user']));
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Login()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
       _showMsg(body['info']);
     }
     setState(() {

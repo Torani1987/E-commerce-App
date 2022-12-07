@@ -1,12 +1,27 @@
+import 'dart:convert';
+
 import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:final_project/view/profile_page/detail_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String? email, nama, phone;
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +32,7 @@ class ProfilePage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Sneakpick!",
+                "4SHOP",
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge
@@ -34,57 +49,61 @@ class ProfilePage extends StatelessWidget {
                   0xffF5F5F5,
                 ),
               ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 48,
-                    backgroundColor: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: ClipOval(
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: Image.network(
-                            "https://i.imgur.com/BoN9kdC.png",
-                            fit: BoxFit.cover,
+              child: Flexible(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 48,
+                      backgroundColor: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: ClipOval(
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: Image.network(
+                              "https://i.imgur.com/BoN9kdC.png",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Yulia Taryana",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "+628123456789",
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "yuliataryana.yt@gmail.com",
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Center(
-                    child: IconButton(
-                      onPressed: () {
-                        Get.to(const DetailProfilePage());
-                      },
-                      icon: const Icon(Icons.edit),
+                    const SizedBox(width: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          nama!,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          phone!,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          email!,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ],
                     ),
-                  )
-                ],
+                    const Spacer(),
+                    Center(
+                      child: Flexible(
+                        child: IconButton(
+                          onPressed: () {
+                            Get.to(const DetailProfilePage());
+                          },
+                          icon: const Icon(Icons.edit),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -154,7 +173,7 @@ class ProfilePage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Login(),
+                        builder: (context) => const LoginPage(),
                       ),
                       (route) => false);
                 },
@@ -164,5 +183,18 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _loadUserData() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var user = jsonDecode(localStorage.getString('user')!);
+
+    if (user != null) {
+      setState(() {
+        nama = user['name'];
+        email = user['email'];
+        phone = user['handphone'];
+      });
+    }
   }
 }
