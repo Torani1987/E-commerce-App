@@ -1,4 +1,6 @@
 import 'package:final_project/view/onboarding_page/onboarding.dart';
+import 'package:final_project/view/splash.dart';
+import 'package:final_project/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const OnBoarding(),
+      home: const SplashScreen(),
     );
   }
 }

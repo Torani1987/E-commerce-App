@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:final_project/view_model/auth_service.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:final_project/view/Login.dart';
-import 'package:final_project/view/homePage.dart';
+import 'package:final_project/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../view_model/AuthService.dart';
+import '../view_model/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   @override

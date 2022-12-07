@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:final_project/controller/product_controller.dart';
 import 'package:final_project/model/product_model.dart';
+import 'package:final_project/view/detail_product_page.dart';
 import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view_model/auth_service.dart';
 import 'package:final_project/view_model/get_product.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     product.getDataProduct();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<Product>>(
@@ -36,11 +40,26 @@ class _HomePageState extends State<HomePage> {
                   itemCount: data!.length,
                   itemBuilder: ((context, index) {
                     return ListTile(
+                      onTap: () {
+                        final id = data[index].id;
+                        if (id != null) {
+                          ProductController().getDetailProduct(id);
+                          ProductController().getReviewProduct(id);
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (c) => DetailProductPage(id: id),
+                            ),
+                          );
+                        }
+                      },
                       leading: Container(
                         color: Colors.grey,
                         height: 100,
                         width: 100,
-                        child: Image.network(data[index].image!),
+                        child: Image.network(
+                          data[index].image!,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       title: Text(
                         data[index].name!,
