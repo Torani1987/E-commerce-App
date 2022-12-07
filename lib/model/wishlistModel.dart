@@ -4,17 +4,17 @@ class WishList {
   final int id;
   final int userId;
   final int productId;
-  final Product cartProduct;
+  final Product? wishProduct;
 
   WishList(
       {required this.id,
-      required this.cartProduct,
+      required this.wishProduct,
       required this.productId,
       required this.userId});
 
   factory WishList.fromJson(Map<String, dynamic> json) => WishList(
       id: json['id'],
-      cartProduct: Product.fromJson(json['product']),
+      wishProduct: Product.fromJson(json['product']),
       productId: json['product_id'],
       userId: json['user_id']);
 }

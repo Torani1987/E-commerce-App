@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String? email, password, name, passwordConfirm, noHp;
   bool _secureText = true;
-  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
 
   _showHidden() {
     setState(() {
@@ -103,11 +103,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
-              validator: (emailValue) {
-                if (emailValue!.isEmpty) {
+              validator: (nameValue) {
+                if (nameValue!.isEmpty) {
                   return 'Please Enter Your Name';
                 }
-                email = emailValue;
+                name = nameValue;
                 return null;
               },
             ),
@@ -154,15 +154,12 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
-              controller: _emailCtrl,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                final bool isValid = EmailValidator.validate(value!);
-                if (_emailCtrl.text.isEmpty) {
+              validator: (emailValue) {
+                if (emailValue!.isEmpty) {
                   return 'Please Enter Your Email';
-                } else if (isValid == false) {
-                  return 'Your format is wrong';
                 }
+                email = emailValue;
                 return null;
               },
             ),
@@ -379,7 +376,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     var data = {
       'name': name,
-      'email': _emailCtrl,
+      'email': email,
       'handphone': noHp,
       'password': password,
       'password_confirmation': passwordConfirm

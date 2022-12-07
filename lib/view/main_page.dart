@@ -7,6 +7,10 @@ import 'package:final_project/view/home.dart';
 import 'package:final_project/view/profile_page/profile.dart';
 import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/wishlist.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:final_project/view_model/auth_service.dart';
+
+import 'login_page/login.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -22,7 +26,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     WishlistPage(),
     const TransactionPage(),
-    const ProfilePage()
+    ProfilePage()
   ];
 
   @override

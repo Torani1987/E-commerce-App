@@ -1,5 +1,5 @@
 import 'package:final_project/model/wishlistModel.dart';
-import 'package:final_project/view_model/wishlistService.dart';
+import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -34,10 +34,10 @@ class _WishlistPageState extends State<WishlistPage> {
                         color: Colors.grey,
                         height: 100,
                         width: 100,
-                        child: Image.network(data[index].cartProduct.image!),
+                        child: Image.network(data[index].wishProduct!.image!),
                       ),
                       title: Text(
-                        data[index].cartProduct.name!,
+                        data[index].wishProduct!.name!,
                         maxLines: 2,
                       ),
                       subtitle: Text(
@@ -47,7 +47,7 @@ class _WishlistPageState extends State<WishlistPage> {
                       trailing: Column(children: [
                         IconButton(
                             onPressed: () => WishlistRepository()
-                                .delCart(data[index].id.toString())
+                                .delWishlist(data[index].id.toString())
                                 .then((value) => setState(
                                       () {},
                                     )),

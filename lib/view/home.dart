@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:final_project/model/product_model.dart';
 import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view_model/auth_service.dart';
-import 'package:final_project/view_model/cartService.dart';
+import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/get_product.dart';
-import 'package:final_project/view_model/wishlistService.dart';
+import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,8 +52,8 @@ class _HomePageState extends State<HomePage> {
                       trailing: Column(children: [
                         IconButton(
                             onPressed: () {
-                              WishlistRepository()
-                                  .addWishlist(data[index].id.toString());
+                              Cartrepository()
+                                  .addCart(data[index].id.toString(), '2');
                             },
                             icon: Icon(Icons.favorite)),
                       ]),

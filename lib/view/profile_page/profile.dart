@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:final_project/view/login_page/login.dart';
 import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/wishlist.dart';
+import 'package:final_project/view_model/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:final_project/view/profile_page/detail_profile.dart';
@@ -16,7 +17,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String? email, nama, phone;
+  String email = '';
+  String nama = '';
+  String phone = '';
   @override
   void initState() {
     super.initState();
@@ -53,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 48,
+                      radius: 28,
                       backgroundColor: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(8),
@@ -73,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          nama!,
+                          nama,
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge
@@ -81,27 +84,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          phone!,
+                          phone,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          email!,
+                          email,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    Center(
-                      child: Flexible(
-                        child: IconButton(
-                          onPressed: () {
-                            Get.to(const DetailProfilePage());
-                          },
-                          icon: const Icon(Icons.edit),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -170,12 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 title: const Text("Logout"),
                 // trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
-                      ),
-                      (route) => false);
+                  _logout();
                 },
               ),
             ],
@@ -195,6 +182,19 @@ class _ProfilePageState extends State<ProfilePage> {
         email = user['email'];
         phone = user['handphone'];
       });
+    }
+  }
+
+  void _logout() async {
+    var res = await NetworkAuth().getData('/api/auth/logout');
+    if (res.statusCode == 200) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.remove('user');
+      localStorage.remove('token');
+      if (mounted) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      }
     }
   }
 }
