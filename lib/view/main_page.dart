@@ -70,6 +70,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
+
       body: body[index],
       bottomNavigationBar: ConvexAppBar(
         activeColor: Colors.black,
@@ -89,4 +90,55 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+AppBar buildCustomAppbar(BuildContext context) {
+  return AppBar(
+    backgroundColor: Colors.black,
+    automaticallyImplyLeading: false,
+    title: TextField(
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: black),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: black),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        labelText: 'Find Something?',
+        labelStyle: Theme.of(context).textTheme.headlineMedium,
+        // labelStyle: const TextStyle(color: Colors.black),
+        suffixIcon: const Icon(
+          Icons.search,
+          color: Colors.black,
+        ),
+      ),
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.search,
+    ),
+    centerTitle: true,
+    actions: [
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.category_outlined,
+          color: Colors.white,
+        ),
+      ),
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.shopping_cart_outlined,
+          color: Colors.white,
+        ),
+      ),
+    ],
+  );
 }

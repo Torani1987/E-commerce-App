@@ -5,7 +5,6 @@ import 'package:final_project/view/login_page.dart';
 import 'package:final_project/view_model/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:final_project/properties_app/prop.dart';
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
