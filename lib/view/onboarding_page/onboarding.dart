@@ -3,7 +3,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:final_project/view/onboarding_page/component/intro_one.dart';
 import 'package:final_project/view/onboarding_page/component/intro_two.dart';
 import 'package:final_project/view/onboarding_page/component/intro_three.dart';
-import 'package:final_project/view/login_page/login.dart';
+import 'package:final_project/view/login_page.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});

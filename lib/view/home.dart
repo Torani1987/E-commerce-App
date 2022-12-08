@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:final_project/model/product_model.dart';
-import 'package:final_project/view/login_page/login.dart';
-import 'package:final_project/view_model/auth_service.dart';
 import 'package:final_project/view_model/get_product.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String name = '';
   String usertoken = '';
+
+  bool isFavorite = false;
   final FetchProduct product = FetchProduct();
 
   @override
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
                   CategoryTile(
-                      icon: Icon(Icons.checkroom, size: 32), name: 'Clothes'),
+                      icon: Icon(Icons.storefront, size: 32), name: 'Fashion'),
                   CategoryTile(
                       icon: Icon(Icons.charging_station, size: 32),
                       name: 'Electronic'),
@@ -101,30 +101,67 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                        horizontal: 12,
+                                        horizontal: 8,
                                         vertical: 8,
                                       ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            data[index].name!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineMedium
-                                                ?.copyWith(
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
+                                          Flexible(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  data[index].name!,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineMedium
+                                                      ?.copyWith(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                Text(
+                                                  'Rp. ${data[index].price!.toInt().toString()}',
+                                                ),
+                                                Text(
+                                                    'Stock : ${data[index].stock.toString()}')
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            'Rp. ${data[index].price!.toInt().toString()}',
+                                          IconButton(
+                                            onPressed: () {
+                                              final WishlistRepository
+                                                  wishlistRepository =
+                                                  WishlistRepository();
+
+                                              wishlistRepository.addWishlist(
+                                                  data[index].id.toString());
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin:
+                                                    EdgeInsets.only(bottom: 30),
+                                                content: Text(
+                                                    'Produk telah ditambahkan wishlist'),
+                                              ));
+
+                                              setState(() {
+                                                data[index].isFavorite =
+                                                    !data[index].isFavorite;
+                                              });
+                                            },
+                                            icon: data[index].isFavorite
+                                                ? const Icon(Icons.favorite)
+                                                : const Icon(
+                                                    Icons.favorite_outline),
                                           ),
-                                          Text(
-                                              'Stock : ${data[index].stock.toString()}')
                                         ],
                                       ),
                                     )
@@ -161,17 +198,6 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
-
-  // void _logout() async {
-  //   var res = await NetworkAuth().getData('/logout');
-  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   localStorage.remove('user');
-  //   localStorage.remove('token');
-  //   if (mounted) {
-  //     Navigator.pushReplacement(
-  //         context, MaterialPageRoute(builder: (context) => const LoginPage()));
-  //   }
-  // }
 }
 
 class CategoryTile extends StatelessWidget {

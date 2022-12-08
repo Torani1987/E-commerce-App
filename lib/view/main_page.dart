@@ -1,13 +1,12 @@
-import 'package:final_project/view/cart_page/cart.dart';
+import 'package:final_project/view/cart.dart';
 import 'package:final_project/widget/searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:final_project/view/home.dart';
-import 'package:final_project/view/profile_page/profile.dart';
+import 'package:final_project/view/profile.dart';
 import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/wishlist.dart';
-import 'package:final_project/view/cartPage.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -61,7 +60,8 @@ class _MainPageState extends State<MainPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const CartPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CartPage()));
             },
             icon: const Icon(
               Icons.shopping_cart_outlined,

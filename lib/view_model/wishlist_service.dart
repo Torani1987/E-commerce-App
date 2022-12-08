@@ -8,7 +8,8 @@ class WishlistRepository {
   var data = [];
   List<WishList> results = [];
   String url = 'https://api1.sib3.nurulfikri.com/api/wishlist';
-  Future<List<WishList>> getDataCart() async {
+
+  Future<List<WishList>> getDataWishlist() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final response = await http.get(Uri.parse(url), headers: {
@@ -19,13 +20,14 @@ class WishlistRepository {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      data = jsonDecode(jsonEncode(body['data']));
-      results = data.map((e) => WishList.fromJson(e)).toList();
+      data = body['data'];
       print(data);
+      results = data.map((e) => WishList.fromJson(e)).toList();
+
+      return results;
     } else {
-      print('api error');
+      return [];
     }
-    return results;
   }
 
   Future addWishlist(String? id) async {
