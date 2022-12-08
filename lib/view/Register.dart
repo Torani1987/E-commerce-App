@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'package:final_project/view_model/auth_service.dart';
-import 'package:final_project/properties_app/prop.dart';
-import 'package:final_project/view/Login.dart';
-import 'package:final_project/view/home.dart';
-import 'package:final_project/view/login.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:final_project/view/login_page.dart';
+import 'package:final_project/view_model/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:final_project/properties_app/prop.dart';
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -19,8 +17,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String? email, password, name, passwordConfirm, noHp;
   bool _secureText = true;
+  final TextEditingController _emailCtrl = TextEditingController();
 
-  showHide() {
+  _showHidden() {
     setState(() {
       _secureText = !_secureText;
     });
@@ -37,76 +36,176 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text(
+          '4SHOP',
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
-      backgroundColor: white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
-          child: Column(children: [
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  'Sign Up',
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.left,
-                )),
-            const SizedBox(
-              height: 7,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Text(
-                'Sign Up',
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.left,
-              ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Sign Up', style: Theme.of(context).textTheme.headlineSmall),
+            const SizedBox(height: 16),
+            Text(
+              'Sign Up',
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             const SizedBox(height: 16),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  labelText: 'Nama',
-                  border: OutlineInputBorder()),
-              validator: (namaValue) {
-                if (namaValue!.isEmpty) {
-                  return 'Silahkan Masukkan Nama';
-                }
-                name = namaValue;
-                return null;
-              },
+            RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                text: 'Name',
+                style: Theme.of(context).textTheme.headlineSmall,
+                children: const [
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
             ),
-            const SizedBox(
-              height: 26,
-            ),
+            const SizedBox(height: 8),
             TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.alternate_email),
-                  labelText: 'Email',
-                  border: OutlineInputBorder()),
+              autocorrect: false,
+              autofocus: true,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintText: 'Name',
+                hintStyle: Theme.of(context).textTheme.headlineMedium,
+                prefixIcon: const Icon(
+                  Icons.person,
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              ),
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
               validator: (emailValue) {
                 if (emailValue!.isEmpty) {
-                  return 'Silahkan Masukkan Email';
+                  return 'Please Enter Your Name';
                 }
                 email = emailValue;
                 return null;
               },
             ),
-            const SizedBox(
-              height: 26,
+            const SizedBox(height: 16),
+            RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                text: 'Email',
+                style: Theme.of(context).textTheme.headlineSmall,
+                children: const [
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
             ),
+            const SizedBox(height: 8),
             TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.call),
-                  labelText: 'No Handphone',
-                  border: OutlineInputBorder()),
+              autocorrect: false,
+              autofocus: true,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintText: 'Email',
+                hintStyle: Theme.of(context).textTheme.headlineMedium,
+                // labelText: 'Email',
+                // labelStyle: Theme.of(context).textTheme.headlineMedium,
+                prefixIcon: const Icon(
+                  Icons.alternate_email,
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              ),
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              controller: _emailCtrl,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                final bool isValid = EmailValidator.validate(value!);
+                if (_emailCtrl.text.isEmpty) {
+                  return 'Please Enter Your Email';
+                } else if (isValid == false) {
+                  return 'Your format is wrong';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
+            RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                text: 'Phone Number',
+                style: Theme.of(context).textTheme.headlineSmall,
+                children: const [
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              autocorrect: false,
+              autofocus: true,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintText: 'Phone Number',
+                hintStyle: Theme.of(context).textTheme.headlineMedium,
+                prefixIcon: const Icon(
+                  Icons.phone_android,
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              ),
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
               validator: (noHpValue) {
                 if (noHpValue!.isEmpty) {
                   return 'Silahkan Masukkan No Handphone';
@@ -115,60 +214,118 @@ class _RegisterPageState extends State<RegisterPage> {
                 return null;
               },
             ),
-            const SizedBox(
-              height: 26,
+            const SizedBox(height: 16),
+            RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                text: 'Password',
+                style: Theme.of(context).textTheme.headlineSmall,
+                children: const [
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
             ),
+            const SizedBox(height: 8),
             TextFormField(
+              autocorrect: false,
+              autofocus: true,
               obscureText: _secureText,
-              keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.key),
-                  suffixIcon: IconButton(
-                      onPressed: showHide,
-                      icon: Icon(_secureText
-                          ? Icons.visibility_off
-                          : Icons.visibility)),
-                  labelText: 'Password',
-                  border: const OutlineInputBorder()),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintText: 'Password',
+                hintStyle: Theme.of(context).textTheme.headlineMedium,
+                prefixIcon: const Icon(Icons.key, color: Colors.grey),
+                suffixIcon: IconButton(
+                  onPressed: _showHidden,
+                  icon: Icon(
+                      _secureText ? Icons.visibility : Icons.visibility_off),
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              ),
+              keyboardType: TextInputType.visiblePassword,
+              textInputAction: TextInputAction.next,
               validator: (passwordValue) {
                 if (passwordValue!.isEmpty) {
-                  return 'Silahkan Masukkan Password';
+                  return 'Please Enter Your Password';
                 }
                 password = passwordValue;
                 return null;
               },
             ),
-            const SizedBox(
-              height: 26,
+            const SizedBox(height: 16),
+            RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                text: 'Confirm Password',
+                style: Theme.of(context).textTheme.headlineSmall,
+                children: const [
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
             ),
+            const SizedBox(height: 8),
             TextFormField(
+              autocorrect: false,
+              autofocus: true,
               obscureText: _secureText,
-              keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.key),
-                  suffixIcon: IconButton(
-                      onPressed: showHide,
-                      icon: Icon(_secureText
-                          ? Icons.visibility_off
-                          : Icons.visibility)),
-                  labelText: 'Konfirmasi Password',
-                  border: const OutlineInputBorder()),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintText: 'Confirm Password',
+                hintStyle: Theme.of(context).textTheme.headlineMedium,
+                prefixIcon: const Icon(Icons.key, color: Colors.grey),
+                suffixIcon: IconButton(
+                  onPressed: _showHidden,
+                  icon: Icon(
+                      _secureText ? Icons.visibility : Icons.visibility_off),
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.done,
               validator: (passwordConfirmValue) {
                 if (passwordConfirmValue!.isEmpty) {
-                  return 'Silahkan Masukkan Konfirmasi Password';
+                  return 'Please Enter Your Confirm Password';
                 }
                 if (passwordConfirmValue != password) {
-                  return 'Konfirmasi password tidak sama';
+                  return 'Confirm Password Not The Same';
                 }
                 passwordConfirm = passwordConfirmValue;
                 return null;
               },
             ),
-            const SizedBox(
-              height: 25,
-            ),
+            const SizedBox(height: 32),
             SizedBox(
-              height: 50,
+              height: 45,
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -178,7 +335,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text(
                   _isLoading ? 'Processing..' : 'Register',
                   textDirection: TextDirection.ltr,
-                  style: const TextStyle(color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: Colors.white),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -187,22 +347,27 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   child: Text(
-                    'Already Have a Account ? Login ',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    'Already Have a Account ?',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(decoration: TextDecoration.underline),
                   ),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Login()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
                   },
                 )
               ],
-            )
+            ),
           ]),
         ),
       ),
@@ -215,7 +380,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     var data = {
       'name': name,
-      'email': email,
+      'email': _emailCtrl,
       'handphone': noHp,
       'password': password,
       'password_confirmation': passwordConfirm
@@ -227,8 +392,9 @@ class _RegisterPageState extends State<RegisterPage> {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['data']['token']));
       localStorage.setString('user', json.encode(body['data']['user']));
+      if (!mounted) return;
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Login()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
       _showMsg(body['info']);
     }
     setState(() {

@@ -4,7 +4,7 @@ import 'package:final_project/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:final_project/view/login_page/login.dart';
+import 'package:final_project/view/login_page.dart';
 import 'package:final_project/view/home.dart';
 // import 'package:final_project/model/registerModel.dart';
 // import 'package:final_project/view/Register.dart';
@@ -56,7 +56,7 @@ class CheckAuth extends StatefulWidget {
   const CheckAuth({super.key});
 
   @override
-  _CheckAuthState createState() => _CheckAuthState();
+  State<CheckAuth> createState() => _CheckAuthState();
 }
 
 class _CheckAuthState extends State<CheckAuth> {
@@ -74,7 +74,6 @@ class _CheckAuthState extends State<CheckAuth> {
     if (token != null) {
       if (mounted) {
         setState(() {
-          print("token : $token");
           isAuth = true;
         });
       }

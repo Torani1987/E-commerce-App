@@ -1,4 +1,4 @@
-import 'package:final_project/view/profile_page/change_profile.dart';
+import 'package:final_project/view/change_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

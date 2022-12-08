@@ -35,8 +35,8 @@ class NetworkAuth {
 
   _getCategory() async {
     token = _getToken();
-    final response = await http.get(Uri.parse(_url + '/api/category'),
-        headers: _setHeaders());
+    final response =
+        await http.get(Uri.parse('$_url/api/category'), headers: _setHeaders());
     return response;
   }
 }
