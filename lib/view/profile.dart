@@ -187,7 +187,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _logout() async {
-    var res = await NetworkAuth().getData('/api/auth/logout');
+    var res = await NetworkAuth().getData('/api/logout');
     if (res.statusCode == 200) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.remove('user');
