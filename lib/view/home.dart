@@ -164,9 +164,26 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                                 Text(
                                                   'Rp. ${data[index].price!.toInt().toString()}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineSmall
+                                                      ?.copyWith(
+                                                          color: Colors.black),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                                 Text(
-                                                    'Stock : ${data[index].stock.toString()}')
+                                                  'Stock : ${data[index].stock.toString()}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineSmall
+                                                      ?.copyWith(
+                                                          color: Colors.black),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                )
                                               ],
                                             ),
                                           ),

@@ -8,7 +8,6 @@ import 'package:final_project/view/wishlist.dart';
 import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/profile.dart';
 
-
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -71,25 +70,44 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-
       body: body[index],
-      bottomNavigationBar: ConvexAppBar(
-        activeColor: Colors.black,
-        backgroundColor: Colors.white,
-        color: Colors.black,
-        items: const [
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.favorite, title: 'Wishlist'),
-          TabItem(icon: Icons.receipt_long, title: 'Transaction'),
-          TabItem(icon: Icons.person, title: 'Profile'),
-        ],
-        onTap: (int i) {
-          setState(() {
-            index = i;
-          });
-        },
+      bottomNavigationBar: StyleProvider(
+        style: Style(),
+        child: ConvexAppBar(
+          activeColor: Colors.black,
+          backgroundColor: Colors.white,
+          color: Colors.grey,
+          style: TabStyle.flip,
+          items: const [
+            TabItem(icon: Icons.home, title: 'Home'),
+            TabItem(icon: Icons.favorite, title: 'Wishlist'),
+            TabItem(icon: Icons.receipt_long, title: 'History'),
+            TabItem(icon: Icons.person, title: 'Profile'),
+          ],
+          onTap: (int i) {
+            setState(() {
+              index = i;
+            });
+          },
+        ),
       ),
     );
+  }
+}
+
+class Style extends StyleHook {
+  @override
+  double get activeIconMargin => 22;
+
+  @override
+  double get activeIconSize => 30;
+
+  @override
+  double? get iconSize => 22;
+
+  @override
+  TextStyle textStyle(Color color, String? fontFamily) {
+    return const TextStyle(fontSize: 14);
   }
 }
 

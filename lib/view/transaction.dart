@@ -12,7 +12,7 @@ class _TransactionPageState extends State<TransactionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20),
+        padding: const EdgeInsets.all(16),
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -26,22 +26,21 @@ class _TransactionPageState extends State<TransactionPage> {
                 ),
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         const SizedBox(width: 10),
-                        const Icon(
-                          Icons.shopping_bag,
-                          color: Colors.green,
-                          size: 30,
-                        ),
-                        const Text(
+                        const Icon(Icons.shopping_bag, color: Colors.green),
+                        Text(
                           "3 Oct 2022",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const Spacer(),
                         Container(
@@ -54,26 +53,26 @@ class _TransactionPageState extends State<TransactionPage> {
                               ),
                             ),
                             onPressed: () {},
-                            child: const Text(
+                            child: Text(
                               "Paid",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xfff2b9542),
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
+                                      color: Colors.green.shade700,
+                                      fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
-                        const Icon(
-                          Icons.more_vert,
-                          color: Colors.black,
-                          size: 25,
-                        ),
+                        const Icon(Icons.more_vert, color: Colors.black),
                       ],
                     ),
-                    const SizedBox(height: 28.0),
+                    const SizedBox(height: 8.0),
                     Row(
                       children: [
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 8),
                         Container(
                           width: 80.0,
                           height: 80.0,
@@ -101,22 +100,32 @@ class _TransactionPageState extends State<TransactionPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: const Text(
+                              width: 200,
+                              child: Text(
                                 "Nike Air Jordan High Travis Scoot",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: const Text(
+                              child: Text(
                                 "1 item",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
@@ -125,14 +134,18 @@ class _TransactionPageState extends State<TransactionPage> {
                     ),
                     const SizedBox(height: 12.0),
                     Row(
-                      children: const [
-                        SizedBox(width: 10),
+                      children: [
+                        const SizedBox(width: 10),
                         Text(
-                          "total shopping",
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          "Total Shopping",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -140,12 +153,16 @@ class _TransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const SizedBox(width: 10),
-                        const Text(
+                        Text(
                           "Rp. 33.999.000",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const Spacer(),
                         Container(
@@ -159,12 +176,16 @@ class _TransactionPageState extends State<TransactionPage> {
                               ),
                             ),
                             onPressed: () {},
-                            child: const Text(
+                            child: Text(
                               "Buy Again",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
@@ -173,164 +194,7 @@ class _TransactionPageState extends State<TransactionPage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 230,
-                decoration: BoxDecoration(
-                  color: const Color(0xffff5f5f5),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(width: 10),
-                        const Icon(
-                          Icons.shopping_bag,
-                          color: Colors.green,
-                          size: 30,
-                        ),
-                        const Text(
-                          "3 Oct 2022",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        const Spacer(),
-                        Container(
-                          height: 35,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: const Color(0xfffffc5c5),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              "Unpaid",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xfffff0000),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.more_vert,
-                          color: Colors.black,
-                          size: 25,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 28.0),
-                    Row(
-                      children: [
-                        const SizedBox(width: 10),
-                        Container(
-                          width: 80.0,
-                          height: 80.0,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Center(
-                            child: Container(
-                              width: 60.0,
-                              height: 60.0,
-                              decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  fit: BoxFit.scaleDown,
-                                  image: AssetImage('assets/images/sepatu.jpg'),
-                                ),
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12.0),
-                        Flexible(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                child: const Text(
-                                  "Nike Air Force 1 Low Shadow Sail Pale Ivory",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 15.0),
-                              Container(
-                                width: 100.0,
-                                child: const Text(
-                                  "1 item",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12.0),
-                    Row(
-                      children: const [
-                        SizedBox(width: 10),
-                        Text(
-                          "total shopping",
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const SizedBox(width: 10),
-                        const Text(
-                          "Rp. 2.399.000",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          width: 90,
-                          height: 35,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: const Color(0xff2B9542),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              "Buy Again",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 20),
             ],
           ),
         ],
