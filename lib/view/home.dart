@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            mainAxisExtent: 250,
+                            mainAxisExtent: 260,
                             mainAxisSpacing: 14.0,
                             crossAxisSpacing: 20.0,
                           ),
@@ -248,6 +248,7 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Column(
         children: [
           icon,
@@ -260,7 +261,6 @@ class CategoryTile extends StatelessWidget {
           ),
         ],
       ),
-      onTap: onTap,
     );
   }
 }

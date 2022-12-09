@@ -143,52 +143,45 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                   ),
                                 ),
-                                OutlinedButton(
-                                  onPressed: () async {
-                                    await cartrepository
-                                        .delCart(data[index].id.toString());
-                                    setState(() {});
-                                    if (!mounted) return;
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        duration: Duration(milliseconds: 1500),
-                                        content:
-                                            Text('Berhasil di hapus dari Cart'),
-                                      ),
-                                    );
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.delete_outline),
+                                      onPressed: () async {
+                                        await cartrepository
+                                            .delCart(data[index].id.toString());
+                                        setState(() {});
+                                        if (!mounted) return;
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            duration:
+                                                Duration(milliseconds: 1500),
+                                            content: Text(
+                                                'Berhasil di hapus dari Cart'),
+                                          ),
+                                        );
 
-                                    setState(() {});
-                                  },
-                                  style: OutlinedButton.styleFrom(
-                                    // ignore: prefer_const_constructors
-                                    side: BorderSide(color: Colors.red),
-                                  ),
-                                  child: Text(
-                                    'Delete from Cart',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall
-                                        ?.copyWith(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
-                                  ),
-                                  child: Text(
-                                    'Checkout Now',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall
-                                        ?.copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
+                                        setState(() {});
+                                      },
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.green,
+                                      ),
+                                      child: Text(
+                                        'Checkout',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall
+                                            ?.copyWith(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             )

@@ -57,6 +57,7 @@ class _TransactionPageState extends State<TransactionPage> {
                             child: const Text(
                               "Paid",
                               style: TextStyle(
+                                fontSize: 14,
                                 color: Color(0xfff2b9542),
                               ),
                             ),
@@ -161,6 +162,7 @@ class _TransactionPageState extends State<TransactionPage> {
                             child: const Text(
                               "Buy Again",
                               style: TextStyle(
+                                fontSize: 14,
                                 color: Colors.white,
                               ),
                             ),
@@ -211,6 +213,7 @@ class _TransactionPageState extends State<TransactionPage> {
                             child: const Text(
                               "Unpaid",
                               style: TextStyle(
+                                fontSize: 14,
                                 color: Color(0xfffff0000),
                               ),
                             ),
@@ -249,30 +252,32 @@ class _TransactionPageState extends State<TransactionPage> {
                           ),
                         ),
                         const SizedBox(width: 12.0),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              child: const Text(
-                                "Nike Air Force 1 Low Shadow Sail Pale Ivory",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                        Flexible(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                child: const Text(
+                                  "Nike Air Force 1 Low Shadow Sail Pale Ivory",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 15.0),
-                            Container(
-                              width: 100.0,
-                              child: const Text(
-                                "1 item",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
+                              const SizedBox(height: 15.0),
+                              Container(
+                                width: 100.0,
+                                child: const Text(
+                                  "1 item",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -315,6 +320,7 @@ class _TransactionPageState extends State<TransactionPage> {
                             child: const Text(
                               "Buy Again",
                               style: TextStyle(
+                                fontSize: 14,
                                 color: Colors.white,
                               ),
                             ),
