@@ -6,6 +6,9 @@ import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../controller/product_controller.dart';
+import 'detail_product_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -169,8 +172,17 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               onTap: () {
-                                // TODO: Navigate To Detail Screen Here
-                              },
+                                final id = data[index].id;
+                                if (id != null) {
+                                  ProductController().getDetailProduct(id);
+                                  ProductController().getReviewProduct(id);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailProductPage(id: id),
+                                    ),
+                                  );
+                                }
+                              }, // TODO: Navigate To Detail Screen Here
                             );
                           },
                         ),

@@ -2,6 +2,7 @@ import 'package:final_project/view/onboarding_page/onboarding.dart';
 import 'package:final_project/view/splash.dart';
 import 'package:final_project/view/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:final_project/view/login_page.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'E-Commerce Apps',
       // Gunakan TextTheme sesuai kebutuhan
       theme: ThemeData(
