@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:final_project/model/product_model.dart';
+import 'package:final_project/view/detail.dart';
 import 'package:final_project/view/detail_category.dart';
 import 'package:final_project/view_model/category_service.dart';
 import 'package:final_project/view_model/get_product.dart';
@@ -208,16 +209,12 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               onTap: () {
-                                final id = data[index].id;
-                                if (id != null) {
-                                  ProductController().getDetailProduct(id);
-                                  ProductController().getReviewProduct(id);
-                                  Navigator.of(context).push(
+                                Navigator.push(
+                                    context,
                                     MaterialPageRoute(
-                                      builder: (c) => DetailProductPage(id: id),
-                                    ),
-                                  );
-                                }
+                                        builder: (context) => Details(
+                                              product: data[index],
+                                            )));
                               },
                             );
                           },

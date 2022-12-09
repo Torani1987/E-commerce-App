@@ -1,4 +1,5 @@
 import 'package:final_project/model/cart_model.dart';
+import 'package:final_project/view/checkout_success.dart';
 import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
@@ -109,39 +110,8 @@ class _CartPageState extends State<CartPage> {
                               ],
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                TextButton(
-                                  onPressed: () async {
-                                    final WishlistRepository repository =
-                                        WishlistRepository();
-
-                                    await repository.addWishlist(
-                                        data[index].cartProduct.id.toString());
-
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        duration: Duration(milliseconds: 1500),
-                                        content: Text(
-                                            'Berhasil di tambahkan ke wishlist'),
-                                      ),
-                                    );
-                                    await cartrepository
-                                        .delCart(data[index].id.toString());
-                                    setState(() {});
-                                  },
-                                  child: Text(
-                                    'Move to wishlist',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall
-                                        ?.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                  ),
-                                ),
                                 OutlinedButton(
                                   onPressed: () async {
                                     await cartrepository
@@ -225,6 +195,11 @@ class _CartPageState extends State<CartPage> {
               ElevatedButton(
                   onPressed: () {
                     FetchTransaction().addCart(alamatCtrl.text);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CheckoutSuccessPage(),
+                        ));
                   },
                   child: Text('CHECKOUT'))
             ],

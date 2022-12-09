@@ -1,5 +1,6 @@
 import 'package:final_project/model/wishlist_model.dart';
 import 'package:final_project/view/cart.dart';
+import 'package:final_project/view/detail.dart';
 import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
@@ -177,10 +178,12 @@ class _WishlistPageState extends State<WishlistPage> {
                       ),
                     ),
                     onTap: () {
+                      final id = data[index].id;
+
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (c) => DetailProductPage(
-                            id: data[index].cartProduct!.id!,
+                          builder: (c) => Details(
+                            product: data[index].cartProduct!,
                           ),
                         ),
                       );
