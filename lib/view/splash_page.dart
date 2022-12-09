@@ -17,12 +17,12 @@ class SplashScreen extends StatelessWidget {
       },
     );
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Center(
         child: Text(
           "4SHOP",
           style: Theme.of(context).textTheme.headline1?.copyWith(
-                color: Colors.white,
+                color: Colors.black,
               ),
         ),
       ),

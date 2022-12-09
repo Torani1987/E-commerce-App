@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:final_project/view/main_page.dart';
-import 'package:final_project/view/splash_screen.dart';
+import 'package:final_project/view/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -119,14 +119,14 @@ class DetailProductPage extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 child: Row(
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Icons.favorite,
                                       color: Colors.red,
                                     ),
                                     Text(
                                       " ${4.6}",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -146,7 +146,7 @@ class DetailProductPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 1.2,
                           ),
                           //description
@@ -154,9 +154,9 @@ class DetailProductPage extends StatelessWidget {
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(10),
-                                child: Text(
+                                child: const Text(
                                   "Description",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -180,7 +180,7 @@ class DetailProductPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 1.2,
                           ),
                           //review
@@ -198,14 +198,14 @@ class DetailProductPage extends StatelessWidget {
                                 ),
                               ),
                               Row(
-                                children: [
+                                children: const [
                                   Icon(
                                     Icons.favorite,
                                     color: Colors.red,
                                   ),
                                   Text(
                                     " ${4.6}",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -247,7 +247,7 @@ class DetailProductPage extends StatelessWidget {
                                           product.mapOfReviewProduct[id]
                                                   ?.data[index].star ??
                                               0,
-                                          (i) => Icon(Icons.star)),
+                                          (i) => const Icon(Icons.star)),
                                     ),
                                     Row(
                                       children: [
@@ -320,7 +320,7 @@ class DetailProductPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         height: 100,
         //create button checkout(green), and add to cart(white,green border)
         child: Row(
@@ -376,7 +376,7 @@ class DetailProductPage extends StatelessWidget {
             //button add to cart
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 width: MediaQuery.of(context).size.width / 2,
                 child: ElevatedButton(
                   onPressed: () {
