@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:final_project/model/product_model.dart';
+import 'package:final_project/view/detail_product_page.dart';
 import 'package:final_project/view_model/get_product.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -170,6 +172,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               onTap: () {
                                 // TODO: Navigate To Detail Screen Here
+                                Navigator.of(context).push(CupertinoPageRoute(builder: (c)=>DetailProductPage(id: data[index].id!,),),);
                               },
                             );
                           },

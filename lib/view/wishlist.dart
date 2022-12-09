@@ -2,7 +2,10 @@ import 'package:final_project/model/wishlist_model.dart';
 import 'package:final_project/view/cart.dart';
 import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'detail_product_page.dart';
 
 class WishlistPage extends StatefulWidget {
   const WishlistPage({super.key});
@@ -33,6 +36,7 @@ class _WishlistPageState extends State<WishlistPage> {
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   return InkWell(
+                    
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       margin: const EdgeInsets.only(bottom: 8),
@@ -175,6 +179,7 @@ class _WishlistPageState extends State<WishlistPage> {
                     ),
                     onTap: () {
                       // TODO: Navigate To Detail Screen Here
+                      Navigator.of(context).push(CupertinoPageRoute(builder: (c)=>DetailProductPage(id: data[index].cartProduct!.id!,),),);
                     },
                   );
                 },
@@ -190,3 +195,5 @@ class _WishlistPageState extends State<WishlistPage> {
     );
   }
 }
+
+
