@@ -2,7 +2,6 @@
 //
 //     final detailProductModel = detailProductModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 DetailProductModel detailProductModelFromJson(String str) =>

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Search extends SearchDelegate {
   final FetchProduct _productsearch = FetchProduct();
-  
+
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
@@ -38,30 +38,72 @@ class Search extends SearchDelegate {
           }
           final data = snapshot.data;
           return ListView.builder(
+            padding: const EdgeInsets.all(16),
             itemCount: data!.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                leading: Container(
-                  color: Colors.grey,
-                  height: 100,
-                  width: 100,
-                  child: data[index].image!.isNotEmpty
-                      ? Image.network(
-                          data[index].image!.toString(),
-                          width: 100,
+              return Container(
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 80,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(data[index].image!),
                           fit: BoxFit.cover,
-                        )
-                      : const Center(),
-                ),
-                title: Text(
-                  data[index].name!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                subtitle: Text(
-                  data[index].description!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data[index].name!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Rp. ${data[index].price}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Stock : ${data[index].stock}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               );
             },

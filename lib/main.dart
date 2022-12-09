@@ -1,13 +1,10 @@
-import 'package:final_project/view/onboarding_page/onboarding.dart';
-import 'package:final_project/view/splash.dart';
-import 'package:final_project/view/splash_screen.dart';
+import 'package:final_project/view/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:final_project/view/splash_page.dart';
 import 'package:final_project/view/login_page.dart';
 import 'package:final_project/view/home.dart';
-// import 'package:final_project/model/registerModel.dart';
-// import 'package:final_project/view/Register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,7 +44,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const MainPage(),
     );
   }
 }

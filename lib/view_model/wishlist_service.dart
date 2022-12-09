@@ -21,7 +21,6 @@ class WishlistRepository {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       data = body['data'];
-      print(data);
       results = data.map((e) => WishList.fromJson(e)).toList();
 
       return results;
@@ -41,7 +40,6 @@ class WishlistRepository {
       'Authorization': 'Bearer $token',
     });
     final body = jsonDecode(resp.body);
-    print(body['info']);
   }
 
   Future delCart(String? id) async {
@@ -54,6 +52,5 @@ class WishlistRepository {
     });
 
     final body = jsonDecode(response.body);
-    print(body['info']);
   }
 }

@@ -2,7 +2,6 @@
 //
 //     final reviewResponseModel = reviewResponseModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ReviewResponseModel reviewResponseModelFromJson(String str) =>

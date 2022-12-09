@@ -23,10 +23,7 @@ class Cartrepository {
       final body = jsonDecode(response.body);
       data = jsonDecode(jsonEncode(body['data']));
       results = data.map((e) => CartModel.fromJson(e)).toList();
-      print(data);
-    } else {
-      print('api error');
-    }
+    } else {}
     return results;
   }
 
@@ -39,7 +36,6 @@ class Cartrepository {
       'Authorization': 'Bearer $token',
     });
     final body = jsonDecode(resp.body);
-    print(body['info']);
   }
 
   Future delCart(String? id) async {
@@ -52,6 +48,5 @@ class Cartrepository {
     });
 
     final body = jsonDecode(response.body);
-    print(body['info']);
   }
 }

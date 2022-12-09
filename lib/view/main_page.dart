@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:final_project/view/home.dart';
-import 'package:final_project/view/profile.dart';
-import 'package:final_project/view/transaction.dart';
 import 'package:final_project/view/wishlist.dart';
+import 'package:final_project/view/transaction.dart';
+import 'package:final_project/view/profile.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

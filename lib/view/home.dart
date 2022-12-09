@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:final_project/model/product_model.dart';
+import 'package:final_project/view/detail_category.dart';
+import 'package:final_project/view_model/category_service.dart';
 import 'package:final_project/view_model/get_product.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   bool isFavorite = false;
   final FetchProduct product = FetchProduct();
+  final CategoryService category = CategoryService();
 
   @override
   void initState() {
@@ -45,16 +48,49 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
+                children: [
                   CategoryTile(
-                      icon: Icon(Icons.storefront, size: 32), name: 'Fashion'),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    const DetailCategoryPage(id: '43')));
+                      },
+                      icon: const Icon(Icons.storefront, size: 32),
+                      name: 'Fashion'),
                   CategoryTile(
-                      icon: Icon(Icons.charging_station, size: 32),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    const DetailCategoryPage(id: '23')));
+                      },
+                      icon: const Icon(Icons.charging_station, size: 32),
                       name: 'Electronic'),
                   CategoryTile(
-                      icon: Icon(Icons.fastfood, size: 32), name: 'Food'),
+                    icon: const Icon(Icons.fastfood, size: 32),
+                    name: 'Food',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  const DetailCategoryPage(id: '102')));
+                    },
+                  ),
                   CategoryTile(
-                      icon: Icon(Icons.chair, size: 32), name: 'Furniture'),
+                    icon: const Icon(Icons.chair, size: 32),
+                    name: 'Furniture',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  const DetailCategoryPage(id: '22')));
+                    },
+                  ),
                 ],
               ),
               FutureBuilder<List<Product>>(
@@ -201,11 +237,13 @@ class _HomePageState extends State<HomePage> {
 }
 
 class CategoryTile extends StatelessWidget {
-  const CategoryTile({Key? key, required this.name, required this.icon})
+  const CategoryTile(
+      {Key? key, required this.name, required this.icon, required this.onTap})
       : super(key: key);
 
   final String name;
   final Widget icon;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +260,7 @@ class CategoryTile extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }

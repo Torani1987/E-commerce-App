@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class detel extends StatefulWidget {
+class DetailCategory extends StatefulWidget {
+  const DetailCategory({super.key});
+
   @override
-  State<detel> createState() => _detelState();
+  State<DetailCategory> createState() => _DetailCategoryState();
 }
 
-class _detelState extends State<detel> {
+class _DetailCategoryState extends State<DetailCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,14 +17,14 @@ class _detelState extends State<detel> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text(
                 "Electronic",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -32,22 +34,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -55,13 +57,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low UV Reactive",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -69,10 +71,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 3.799.000",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -88,7 +90,7 @@ class _detelState extends State<detel> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -98,22 +100,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -121,13 +123,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low Shadow Sail Pale Ivory",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -135,10 +137,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 2.799.000",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -154,7 +156,7 @@ class _detelState extends State<detel> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -164,22 +166,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -187,13 +189,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low UV Reactive",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -201,10 +203,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 2.399.000",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -220,7 +222,7 @@ class _detelState extends State<detel> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -230,22 +232,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -253,13 +255,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low UV Reactive",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -267,10 +269,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 2.399.000",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -286,7 +288,7 @@ class _detelState extends State<detel> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -296,22 +298,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -319,13 +321,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low UV Reactive",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -333,10 +335,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 2.399.000",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -352,7 +354,7 @@ class _detelState extends State<detel> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -362,22 +364,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -385,13 +387,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low UV Reactive",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -399,10 +401,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 2.399.000",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -418,7 +420,7 @@ class _detelState extends State<detel> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Column(
@@ -428,22 +430,22 @@ class _detelState extends State<detel> {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                  color: const Color(0xFFFF5F5F5),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    SizedBox(height: 12.0),
+                    const SizedBox(height: 12.0),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Column(
-                          children: <Widget>[
+                          children: const <Widget>[
                             Image(
                               image: AssetImage("asset/images/spt.jpg"),
                               height: 100,
@@ -451,13 +453,13 @@ class _detelState extends State<detel> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 12.0),
+                        const SizedBox(width: 12.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                              child: Text(
+                              child: const Text(
                                 "Nike Air Force 1 Low UV Reactive",
                                 style: TextStyle(
                                   fontSize: 18,
@@ -465,10 +467,10 @@ class _detelState extends State<detel> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15.0),
+                            const SizedBox(height: 15.0),
                             Container(
                               width: 100.0,
-                              child: Text(
+                              child: const Text(
                                 "Rp. 2.399.000",
                                 style: TextStyle(
                                   fontSize: 15,

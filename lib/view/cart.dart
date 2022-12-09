@@ -1,4 +1,5 @@
 import 'package:final_project/model/cart_model.dart';
+import 'package:final_project/view/checkout_page.dart';
 import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
@@ -147,6 +148,7 @@ class _CartPageState extends State<CartPage> {
                                     await cartrepository
                                         .delCart(data[index].id.toString());
                                     setState(() {});
+                                    if (!mounted) return;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         duration: Duration(milliseconds: 1500),

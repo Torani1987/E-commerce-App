@@ -23,7 +23,6 @@ class FetchProduct {
       final body = jsonDecode(response.body);
       data = jsonDecode(jsonEncode(body['data']));
       results = data.map((e) => Product.fromJson(e)).toList();
-      print(data);
       if (query != null) {
         results = results
             .where((element) =>
@@ -31,7 +30,6 @@ class FetchProduct {
             .toList();
       }
     } else {
-      print('api error');
     }
     return results;
   }
