@@ -1,8 +1,9 @@
 import 'package:final_project/model/cart_model.dart';
-import 'package:final_project/view/checkout_page.dart';
 import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
+
+import '../view_model/transaction_service.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -118,8 +119,6 @@ class _CartPageState extends State<CartPage> {
                                     await repository.addWishlist(
                                         data[index].cartProduct.id.toString());
 
-                                    if (!mounted) return;
-
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         duration: Duration(milliseconds: 1500),
@@ -148,7 +147,6 @@ class _CartPageState extends State<CartPage> {
                                     await cartrepository
                                         .delCart(data[index].id.toString());
                                     setState(() {});
-                                    if (!mounted) return;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         duration: Duration(milliseconds: 1500),
@@ -175,7 +173,9 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                 ),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _showDialog();
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
                                   ),
@@ -205,6 +205,32 @@ class _CartPageState extends State<CartPage> {
               );
             }
           }),
+    );
+  }
+
+  _showDialog() {
+    TextEditingController alamatCtrl = TextEditingController();
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          child: Column(
+            children: [
+              TextField(
+                controller: alamatCtrl,
+                decoration: InputDecoration(
+                  hintText: "masukkan alamat ",
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    FetchTransaction().addCart(alamatCtrl.text);
+                  },
+                  child: Text('CHECKOUT'))
+            ],
+          ),
+        );
+      },
     );
   }
 }

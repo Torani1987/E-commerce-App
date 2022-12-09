@@ -8,6 +8,9 @@ import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../controller/product_controller.dart';
+import 'detail_product_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -108,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisCount: 2,
                             mainAxisExtent: 250,
                             mainAxisSpacing: 14.0,
-                            crossAxisSpacing: 20.0,
+                            crossAxisSpacing: 30.0,
                           ),
                           itemCount: data!.length,
                           itemBuilder: (context, index) {
@@ -122,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      height: 180,
+                                      height: 150,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                         borderRadius: const BorderRadius.only(
@@ -205,7 +208,16 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               onTap: () {
-                                // TODO: Navigate To Detail Screen Here
+                                final id = data[index].id;
+                                if (id != null) {
+                                  ProductController().getDetailProduct(id);
+                                  ProductController().getReviewProduct(id);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailProductPage(id: id),
+                                    ),
+                                  );
+                                }
                               },
                             );
                           },

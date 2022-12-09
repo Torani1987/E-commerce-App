@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const MainPage(),
+      home: const LoginPage(),
     );
   }
 }

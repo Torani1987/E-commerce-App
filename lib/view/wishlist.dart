@@ -4,6 +4,9 @@ import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
 
+import '../controller/product_controller.dart';
+import 'detail_product_page.dart';
+
 class WishlistPage extends StatefulWidget {
   const WishlistPage({super.key});
 
@@ -174,7 +177,13 @@ class _WishlistPageState extends State<WishlistPage> {
                       ),
                     ),
                     onTap: () {
-                      // TODO: Navigate To Detail Screen Here
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (c) => DetailProductPage(
+                            id: data[index].cartProduct!.id!,
+                          ),
+                        ),
+                      );
                     },
                   );
                 },

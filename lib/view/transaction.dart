@@ -254,6 +254,7 @@ class _TransactionPageState extends State<TransactionPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
+                              width: 200,
                               child: const Text(
                                 "Nike Air Force 1 Low Shadow Sail Pale Ivory",
                                 style: TextStyle(
