@@ -5,6 +5,7 @@ import 'package:final_project/view/login_page.dart';
 import 'package:final_project/view_model/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:final_project/properties_app/prop.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -102,11 +103,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
-              validator: (emailValue) {
-                if (emailValue!.isEmpty) {
+              validator: (nameValue) {
+                if (nameValue!.isEmpty) {
                   return 'Please Enter Your Name';
                 }
-                email = emailValue;
+                name = nameValue;
                 return null;
               },
             ),
@@ -380,7 +381,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     var data = {
       'name': name,
-      'email': _emailCtrl,
+      'email': _emailCtrl.text,
       'handphone': noHp,
       'password': password,
       'password_confirmation': passwordConfirm

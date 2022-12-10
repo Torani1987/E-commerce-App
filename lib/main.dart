@@ -1,13 +1,9 @@
-import 'package:final_project/view/onboarding_page/onboarding.dart';
-import 'package:final_project/view/splash.dart';
-import 'package:final_project/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:final_project/view/splash_page.dart';
 import 'package:final_project/view/login_page.dart';
-import 'package:final_project/view/home.dart';
-// import 'package:final_project/model/registerModel.dart';
-// import 'package:final_project/view/Register.dart';
+import 'package:final_project/view/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +23,12 @@ class _MyAppState extends State<MyApp> {
       title: 'E-Commerce Apps',
       // Gunakan TextTheme sesuai kebutuhan
       theme: ThemeData(
-        useMaterial3: true,
+        useMaterial3: false,
+        appBarTheme: AppBarTheme(
+            backgroundColor: Colors.black,
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+            )),
         textTheme: TextTheme(
           titleLarge: GoogleFonts.montserrat(fontSize: 20),
           titleMedium: GoogleFonts.montserrat(fontSize: 16),
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const SplashPage(),
     );
   }
 }

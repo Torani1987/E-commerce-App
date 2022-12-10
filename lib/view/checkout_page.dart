@@ -1,8 +1,6 @@
 import 'package:final_project/model/detail_product.dart';
-import 'package:final_project/view/detail_product_page.dart';
+import 'package:final_project/view/detail_product.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({
@@ -44,9 +42,9 @@ class CheckoutPage extends StatelessWidget {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text("Name"),
-                            const Text("Address"),
+                          children: const [
+                            Text("Name"),
+                            Text("Address"),
                           ],
                         ),
                       ),
@@ -57,9 +55,9 @@ class CheckoutPage extends StatelessWidget {
                         flex: 3,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(": Muhammad Fikri"),
-                            const Text(": Jl. Kebon Jeruk Raya No. 1"),
+                          children: const [
+                            Text(": Muhammad Fikri"),
+                            Text(": Jl. Kebon Jeruk Raya No. 1"),
                           ],
                         ),
                       ),
@@ -118,7 +116,7 @@ class CheckoutPage extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
-        color: Color(0xffF5F5F5),
+        color: const Color(0xffF5F5F5),
         height: 100,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,7 +136,7 @@ class CheckoutPage extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   backgroundColor: Colors.green,
                   foregroundColor: Colors.white),
               onPressed: () {

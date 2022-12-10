@@ -1,5 +1,6 @@
 import 'package:final_project/model/wishlist_model.dart';
-import 'package:final_project/view/cart.dart';
+import 'package:final_project/view/cart_page.dart';
+import 'package:final_project/view/detail_product_page.dart';
 import 'package:final_project/view_model/cart_service.dart';
 import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
@@ -103,15 +104,15 @@ class _WishlistPageState extends State<WishlistPage> {
                                 onPressed: () async {
                                   await wishlistRepository
                                       .delCart(data[index].id.toString());
-
                                   if (!mounted) return;
-
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
+                                    duration: Duration(milliseconds: 1500),
                                     behavior: SnackBarBehavior.floating,
-                                    margin: EdgeInsets.only(bottom: 30),
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 30, horizontal: 16),
                                     content: Text(
-                                        'Produk telah dihapus dari wishlist'),
+                                        'The product has been removed from wishlist'),
                                   ));
                                   setState(() {});
                                 },
@@ -152,10 +153,15 @@ class _WishlistPageState extends State<WishlistPage> {
 
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
+                                        duration:
+                                            const Duration(milliseconds: 1500),
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 30, horizontal: 16),
                                         content: const Text(
-                                            'Produk berhasil ditambahkan ke keranjang'),
+                                            'Product success added to cart'),
                                         action: SnackBarAction(
-                                            label: 'Lihat',
+                                            label: 'See',
                                             onPressed: () {
                                               Navigator.push(
                                                   context,
@@ -174,7 +180,15 @@ class _WishlistPageState extends State<WishlistPage> {
                       ),
                     ),
                     onTap: () {
-                      // TODO: Navigate To Detail Screen Here
+                      final id = data[index].id;
+
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (c) => DetailProductPage(
+                            product: data[index].cartProduct!,
+                          ),
+                        ),
+                      );
                     },
                   );
                 },
@@ -182,7 +196,13 @@ class _WishlistPageState extends State<WishlistPage> {
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Padding(
+                padding: EdgeInsets.all(24.0),
+                child: LinearProgressIndicator(
+                  color: Colors.black,
+                  backgroundColor: Colors.grey,
+                ),
+              ),
             );
           }
         },

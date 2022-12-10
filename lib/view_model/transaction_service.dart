@@ -1,15 +1,14 @@
 import 'dart:convert';
 
-import 'package:final_project/model/wishlist_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import '../model/transaction_model.dart';
 
-class WishlistRepository {
+class FetchTransaction {
   var data = [];
-  List<WishList> results = [];
-  String url = 'https://api1.sib3.nurulfikri.com/api/wishlist';
-
-  Future<List<WishList>> getDataWishlist() async {
+  String url = 'https://api1.sib3.nurulfikri.com/api/transaksi';
+  List<Transaction> results = [];
+  Future<List<Transaction>> getTransaction({String? query}) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final response = await http.get(Uri.parse(url), headers: {
@@ -20,19 +19,15 @@ class WishlistRepository {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      data = body['data'];
-      results = data.map((e) => WishList.fromJson(e)).toList();
-
-      return results;
+      data = jsonDecode(jsonEncode(body['data']));
+      results = data.map((e) => Transaction.fromJson(e)).toList();
     } else {
-      return [];
     }
+    return results;
   }
 
-  Future addWishlist(String? id) async {
-    final data = {
-      'product_id': id,
-    };
+  Future addCart(String? alamat) async {
+    final data = {'alamat': alamat};
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final resp = await http.post(Uri.parse(url), body: data, headers: {
@@ -40,17 +35,5 @@ class WishlistRepository {
       'Authorization': 'Bearer $token',
     });
     final body = jsonDecode(resp.body);
-  }
-
-  Future delCart(String? id) async {
-    String delUrl = '$url/$id';
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    String token = await jsonDecode(localStorage.getString('token')!);
-    final response = await http.delete(Uri.parse(delUrl), headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-
-    final body = jsonDecode(response.body);
   }
 }
