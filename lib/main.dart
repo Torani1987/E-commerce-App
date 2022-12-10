@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       // Gunakan TextTheme sesuai kebutuhan
       theme: ThemeData(
         useMaterial3: false,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
             backgroundColor: Colors.black,
             titleTextStyle: TextStyle(
               color: Colors.white,
@@ -40,11 +40,6 @@ class _MyAppState extends State<MyApp> {
           bodySmall: GoogleFonts.montserrat(fontSize: 8),
           labelLarge: GoogleFonts.hind(fontSize: 24),
           labelSmall: GoogleFonts.hind(fontSize: 8),
-          // bodyMedium: ,
-          // displayLarge: ,
-          // displayMedium: ,
-          // displaySmall: ,
-          // labelMedium: ,
         ),
       ),
       debugShowCheckedModeBanner: false,
