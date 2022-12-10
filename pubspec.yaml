@@ -35,6 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_gen: ^5.1.0+1
+  flutter_launcher_icons: ^0.11.0
   get: ^4.6.5
   google_fonts: ^3.0.1
   http: ^0.13.5
@@ -47,6 +48,12 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, de
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

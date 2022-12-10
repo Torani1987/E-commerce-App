@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     'Category',
                     style: Theme.of(context)
