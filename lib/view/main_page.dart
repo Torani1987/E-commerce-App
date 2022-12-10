@@ -1,12 +1,12 @@
-import 'package:final_project/view/cart.dart';
+import 'package:final_project/view/cart_page.dart';
 import 'package:final_project/widget/searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/properties_app/prop.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:final_project/view/home.dart';
-import 'package:final_project/view/wishlist.dart';
-import 'package:final_project/view/transaction.dart';
-import 'package:final_project/view/profile.dart';
+import 'package:final_project/view/home_page.dart';
+import 'package:final_project/view/wishlist_page.dart';
+import 'package:final_project/view/transaction_page.dart';
+import 'package:final_project/view/profile__page.dart';
 
 
 class MainPage extends StatefulWidget {

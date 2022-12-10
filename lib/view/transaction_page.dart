@@ -1,7 +1,4 @@
-import 'package:final_project/global/global_prop.dart';
-import 'package:final_project/view/detail.dart';
-import 'package:final_project/view/detail_transaction.dart';
-import 'package:final_project/view/home.dart';
+import 'package:final_project/view/detail_transaction_page.dart';
 import 'package:final_project/view/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +13,7 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  FetchTransaction _transaction = FetchTransaction();
+  final FetchTransaction _transaction = FetchTransaction();
   @override
   void initState() {
     super.initState();
@@ -52,16 +49,15 @@ class _TransactionPageState extends State<TransactionPage> {
                             height: 20,
                           ),
                           Container(
-                            height: 230,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 8),
                             decoration: BoxDecoration(
-                              color: const Color(0xffff5f5f5),
+                              color: Colors.grey.shade200,
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Column(
                               children: <Widget>[
-                                const SizedBox(
-                                  height: 20,
-                                ),
                                 Row(
                                   children: [
                                     const SizedBox(width: 10),
@@ -75,22 +71,22 @@ class _TransactionPageState extends State<TransactionPage> {
                                       style: TextStyle(fontSize: 14),
                                     ),
                                     const Spacer(),
-                                    Container(
+                                    SizedBox(
                                       height: 35,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xfffffc5c5),
+                                          backgroundColor: Colors.grey.shade200,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
                                         ),
                                         onPressed: () {},
-                                        child: const Text(
-                                          'Paid',
-                                          style: TextStyle(
-                                            color: Colors.green,
+                                        child: Text(
+                                          data[index].status,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
                                           ),
                                         ),
                                       ),
@@ -102,7 +98,7 @@ class _TransactionPageState extends State<TransactionPage> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 28.0),
+                                const Divider(),
                                 Row(
                                   children: [
                                     const SizedBox(width: 10),
@@ -132,33 +128,32 @@ class _TransactionPageState extends State<TransactionPage> {
                                       ),
                                     ),
                                     const SizedBox(width: 12.0),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                          width: 200,
-                                          child: Text(
+                                    Flexible(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
                                             data[index].products[0].name,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 15.0),
-                                        Container(
-                                          width: 100.0,
-                                          child: Text(
-                                            ' ${data[index].products[0].pivot.qty.toString()} item',
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
+                                          const SizedBox(height: 15.0),
+                                          SizedBox(
+                                            width: 100.0,
+                                            child: Text(
+                                              ' ${data[index].products[0].pivot.qty.toString()} item',
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -167,9 +162,9 @@ class _TransactionPageState extends State<TransactionPage> {
                                   children: const [
                                     SizedBox(width: 10),
                                     Text(
-                                      "total shopping",
+                                      "Total shopping :",
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -182,19 +177,17 @@ class _TransactionPageState extends State<TransactionPage> {
                                     const SizedBox(width: 10),
                                     Text(
                                       "Rp ${data[index].total}",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
+                                      style: const TextStyle(
+                                        fontSize: 18,
                                       ),
                                     ),
                                     const Spacer(),
-                                    Container(
+                                    SizedBox(
                                       width: 90,
                                       height: 35,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xff2B9542),
+                                          backgroundColor: Colors.black,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -205,13 +198,14 @@ class _TransactionPageState extends State<TransactionPage> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    MainPage(),
+                                                    const MainPage(),
                                               ));
                                         },
                                         child: const Text(
                                           "Buy Again",
                                           style: TextStyle(
                                             color: Colors.white,
+                                            fontSize: 14,
                                           ),
                                         ),
                                       ),
@@ -227,7 +221,15 @@ class _TransactionPageState extends State<TransactionPage> {
                   },
                 );
               } else {
-                return CircularProgressIndicator();
+                return const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(24.0),
+                    child: LinearProgressIndicator(
+                      color: Colors.black,
+                      backgroundColor: Colors.grey,
+                    ),
+                  ),
+                );
               }
             }));
   }

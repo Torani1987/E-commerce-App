@@ -16,10 +16,10 @@ class CheckoutSuccessPage extends StatelessWidget {
                 child: Lottie.asset('assets/lottie/checkout-successful.json')),
             Text('Checkout Success',
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge
-                    ?.copyWith(fontWeight: FontWeight.bold)),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    )),
             const SizedBox(height: 36),
             ElevatedButton(
               onPressed: () => Navigator.pushAndRemoveUntil(

@@ -1,8 +1,8 @@
 import 'package:final_project/view/onboarding_page/onboarding.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,17 @@ class SplashScreen extends StatelessWidget {
     );
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Text(
-          "4SHOP",
-          style: Theme.of(context).textTheme.headline1?.copyWith(
-                color: Colors.black,
-              ),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset('assets/logo.png'),
+          Text(
+            "4SHOP",
+            style: Theme.of(context).textTheme.headline1?.copyWith(
+                  color: Colors.black,
+                ),
+          ),
+        ],
       ),
     );
   }

@@ -1,10 +1,7 @@
 import 'package:final_project/model/product_model.dart';
-import 'package:final_project/view/detail.dart';
 import 'package:final_project/view/detail_product_page.dart';
 import 'package:final_project/view_model/get_product.dart';
 import 'package:flutter/material.dart';
-import 'package:final_project/model/cart_model.dart';
-import 'package:final_project/model/product_model.dart';
 
 class Search extends SearchDelegate {
   final FetchProduct _productsearch = FetchProduct();
@@ -50,7 +47,8 @@ class Search extends SearchDelegate {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Details(product: data[index])),
+                        builder: (context) =>
+                            DetailProductPage(product: data[index])),
                   );
                 },
                 child: Container(

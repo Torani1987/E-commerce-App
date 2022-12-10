@@ -1,9 +1,7 @@
 import 'package:final_project/model/cart_model.dart';
-import 'package:final_project/view/checkout_success.dart';
+import 'package:final_project/view/checkout_success_page.dart';
 import 'package:final_project/view_model/cart_service.dart';
-import 'package:final_project/view_model/wishlist_service.dart';
 import 'package:flutter/material.dart';
-
 import '../view_model/transaction_service.dart';
 
 class CartPage extends StatefulWidget {
@@ -30,7 +28,7 @@ class _CartPageState extends State<CartPage> {
           style: Theme.of(context)
               .textTheme
               .headlineLarge
-              ?.copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+              ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: FutureBuilder<List<CartModel>>(
@@ -39,7 +37,7 @@ class _CartPageState extends State<CartPage> {
             final data = snapshot.data;
             if (snapshot.hasData) {
               return Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(8),
                 child: ListView.builder(
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
@@ -109,6 +107,7 @@ class _CartPageState extends State<CartPage> {
                                 )
                               ],
                             ),
+                            const SizedBox(height: 12),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -117,11 +116,12 @@ class _CartPageState extends State<CartPage> {
                                     await cartrepository
                                         .delCart(data[index].id.toString());
                                     setState(() {});
+                                    if (!mounted) return;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         duration: Duration(milliseconds: 1500),
-                                        content:
-                                            Text('Berhasil di hapus dari Cart'),
+                                        content: Text(
+                                            'Product success removed from cart'),
                                       ),
                                     );
 
@@ -183,27 +183,52 @@ class _CartPageState extends State<CartPage> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
-          child: Column(
-            children: [
-              TextField(
-                controller: alamatCtrl,
-                decoration: InputDecoration(
-                  hintText: "masukkan alamat ",
+        return Column(
+          children: [
+            TextField(
+              controller: alamatCtrl,
+              decoration: InputDecoration(
+                hintText: "Enter Your Address ",
+                contentPadding: const EdgeInsets.all(16),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                prefixIcon: const Icon(
+                  Icons.add_business,
+                  color: Colors.black,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Colors.black),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    FetchTransaction().addCart(alamatCtrl.text);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CheckoutSuccessPage(),
-                        ));
-                  },
-                  child: Text('CHECKOUT'))
-            ],
-          ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                FetchTransaction().addCart(alamatCtrl.text);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CheckoutSuccessPage(),
+                    ));
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(16),
+                backgroundColor: Colors.black,
+              ),
+              child: Text(
+                'CHECKOUT',
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            )
+          ],
         );
       },
     );
