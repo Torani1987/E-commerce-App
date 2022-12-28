@@ -1,9 +1,12 @@
+import 'package:final_project/model/detail_product.dart';
 import 'package:final_project/view/main_page.dart';
+import 'package:final_project/view_model/get_product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
 
 import '../controller/product_controller.dart';
+import '../model/review_response_model.dart';
 import 'checkout_page.dart';
 
 class DetailProductPage extends StatelessWidget {
@@ -17,300 +20,325 @@ class DetailProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildCustomAppbar(context),
-      body: ListView(
-        children: [
-          Obx(() {
-            final product = ProductController();
-            if (product.isDetailLoading.value) {
+      body: FutureBuilder<DetailProductModel>(
+        future: FetchProduct().getDetailProduct(id),
+        builder: (context, snapshot2) {
+          switch (snapshot2.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+            case ConnectionState.active:
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (product.detailErrorMessage.value.isNotEmpty) {
-              return Center(
-                child: Text(product.detailErrorMessage.value),
-              );
-            } else {
-              final data = product.mapOfDetailProduct[id];
-              return Column(
+            case ConnectionState.done:
+              // TODO: Handle this case.
+              if (snapshot2.hasError) {
+                return Center(
+                  child: Text(snapshot2.error.toString()),
+                );
+              }
+              if (!snapshot2.hasData) {
+                return const Center(
+                  child: Text('Data tidak ada'),
+                );
+              }
+              final data = snapshot2.data!.data;
+
+              return ListView(
                 children: [
-                  AspectRatio(
-                    aspectRatio: 360 / 288,
-                    child: Stack(
-                      children: [
-                        Positioned.fill(
-                          child: Container(
-                            // height: 288,
-                            // width: double.infinity,
-                            decoration:
-                                BoxDecoration(color: Colors.grey[300]),
-                            child: Image.network(
-                              data!.image,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        //back button
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white24,
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_back,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-//title
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
+                  Column(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 360 / 288,
+                        child: Stack(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                data.name,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                            Positioned.fill(
+                              child: Container(
+                                // height: 288,
+                                // width: double.infinity,
+                                decoration:
+                                    BoxDecoration(color: Colors.grey[300]),
+                                child: Image.network(
+                                  data.image,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-//price
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                data.harga.asCurrencyFormat,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        //rating anf total review
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.favorite,
-                                    color: Colors.red,
+                            //back button
+                            Positioned(
+                              top: 10,
+                              left: 10,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white24,
+                                    borderRadius: BorderRadius.circular(24),
                                   ),
-                                  Text(
-                                    " ${4.6}",
-                                    style: TextStyle(
+                                  child: const Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+//title
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    data.name,
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                "${product.mapOfReviewProduct[id]?.totalReview} Reviewers",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                        const Divider(
-                          thickness: 1.2,
-                        ),
-                        //description
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              child: const Text(
-                                "Description",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  data.deskripsi,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Divider(
-                          thickness: 1.2,
-                        ),
-                        //review
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                "Review (${product.mapOfReviewProduct[id]?.totalReview})",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+//price
                             Row(
-                              children: const [
-                                Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                ),
-                                Text(
-                                  " ${4.6}",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    data.harga.asCurrencyFormat,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        //list tile of review
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: (product.mapOfReviewProduct[id]?.data
-                                          .length ??
-                                      0) <
-                                  2
-                              ? product.mapOfReviewProduct[id]?.data.length
-                              : product.mapOfReviewProduct[id]?.data
-                                      .getRange(0, 2)
-                                      .length ??
-                                  0,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  product.mapOfReviewProduct[id]?.data[index]
-                                          .image ??
-                                      "",
-                                ),
-                              ),
-                              title: Text(product.mapOfReviewProduct[id]
-                                      ?.data[index].user.name ??
-                                  ""),
-                              subtitle: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: List.generate(
-                                        product.mapOfReviewProduct[id]
-                                                ?.data[index].star ??
-                                            0,
-                                        (i) => const Icon(Icons.star)),
-                                  ),
-                                  Row(
+                            //rating anf total review
+
+                            FutureBuilder<ReviewResponseModel>(
+                                future: FetchProduct().getReviews(id),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData)
+                                    return const SizedBox();
+                                  final reviewState = snapshot.data!;
+                                  return Column(
                                     children: [
-                                      Expanded(
-                                        child: Text(product
-                                                .mapOfReviewProduct[id]
-                                                ?.data[index]
-                                                .review ??
-                                            " "),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Row(
+                                              children: const [
+                                                Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.red,
+                                                ),
+                                                Text(
+                                                  " ${4.6}",
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Text(
+                                              "${reviewState.totalReview} Reviewers",
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const Divider(
+                                        thickness: 1.2,
+                                      ),
+                                      //description
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: const Text(
+                                              "Description",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                data.deskripsi,
+                                                style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const Divider(
+                                        thickness: 1.2,
+                                      ),
+                                      //review
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Text(
+                                              "Review (${reviewState.totalReview})",
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: const [
+                                              Icon(
+                                                Icons.favorite,
+                                                color: Colors.red,
+                                              ),
+                                              Text(
+                                                " ${4.6}",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      //list tile of review
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount:
+                                            (reviewState.data.length ?? 0) < 2
+                                                ? reviewState.data.length
+                                                : reviewState.data
+                                                        .getRange(0, 2)
+                                                        .length ??
+                                                    0,
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                            leading: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                reviewState.data[index].image ??
+                                                    "",
+                                              ),
+                                            ),
+                                            title: Text(reviewState
+                                                    .data[index].user.name ??
+                                                ""),
+                                            subtitle: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: List.generate(
+                                                      reviewState.data[index]
+                                                              .star ??
+                                                          0,
+                                                      (i) => const Icon(
+                                                          Icons.star)),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(reviewState
+                                                              .data[index]
+                                                              .review ??
+                                                          " "),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            trailing: Text(reviewState
+                                                    .data[index]
+                                                    .createdAt
+                                                    .dateStringHistory ??
+                                                ""),
+                                          );
+                                        },
                                       ),
                                     ],
-                                  ),
-                                ],
-                              ),
-                              trailing: Text(product
-                                      .mapOfReviewProduct[id]
-                                      ?.data[index]
-                                      .createdAt
-                                      .dateStringHistory ??
-                                  ""),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  //button see all review
-                  product.mapOfReviewProduct[id]?.data.isEmpty ?? true
-                      ? Container()
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => ReviewPage(
-                                //       id: id,
-                                //     ),
-                                //   ),
-                                // );
-                              },
-                              child: const Text("See All Review"),
-                            ),
+                                  );
+                                }),
                           ],
                         ),
+                      ),
+                      //button see all review
+                      !snapshot2.hasData
+                          ? Container()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) => ReviewPage(
+                                    //       id: id,
+                                    //     ),
+                                    //   ),
+                                    // );
+                                  },
+                                  child: const Text("See All Review"),
+                                ),
+                              ],
+                            ),
+                    ],
+                  )
+
+                  // return Container(
+                  //   child: Column(
+                  //     children: [
+                  //       Container(
+                  //         height: 200,
+                  //         width: 200,
+                  //         child: Image.network(
+                  //           product.image!,
+                  //           fit: BoxFit.cover,
+                  //         ),
+                  //       ),
+                  //       Text(product.name!),
+                  //       Text(product.price.toString()),
+                  //       Text(product.description!),
+                  //     ],
+                  //   ),
+                  // );
                 ],
               );
-            }
-            // return Container(
-            //   child: Column(
-            //     children: [
-            //       Container(
-            //         height: 200,
-            //         width: 200,
-            //         child: Image.network(
-            //           product.image!,
-            //           fit: BoxFit.cover,
-            //         ),
-            //       ),
-            //       Text(product.name!),
-            //       Text(product.price.toString()),
-            //       Text(product.description!),
-            //     ],
-            //   ),
-            // );
-          }),
-        ],
+          }
+        },
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),

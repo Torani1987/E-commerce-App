@@ -4,7 +4,7 @@ import 'dart:convert';
 // import 'package:final_project/model/category_model.dart';
 import 'package:final_project/model/cart_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart ' as http;
+import 'package:http/http.dart' as http;
 
 class Cartrepository {
   var data = [];
