@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:final_project/model/product_model.dart';
+import 'package:final_project/view/detail.dart';
 import 'package:final_project/view/detail_category.dart';
 import 'package:final_project/view_model/category_service.dart';
 import 'package:final_project/view_model/get_product.dart';
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisCount: 2,
                             mainAxisExtent: 250,
                             mainAxisSpacing: 14.0,
-                            crossAxisSpacing: 20.0,
+                            crossAxisSpacing: 30.0,
                           ),
                           itemCount: data!.length,
                           itemBuilder: (context, index) {
@@ -125,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      height: 180,
+                                      height: 150,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                         borderRadius: const BorderRadius.only(
@@ -208,17 +209,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               onTap: () {
-                                final id = data[index].id;
-                                if (id != null) {
-                                  ProductController().getDetailProduct(id);
-                                  ProductController().getReviewProduct(id);
-                                  Navigator.of(context).push(
+                                Navigator.push(
+                                    context,
                                     MaterialPageRoute(
-                                      builder: (c) => DetailProductPage(id: id),
-                                    ),
-                                  );
-                                }
-                              }, // TODO: Navigate To Detail Screen Here
+                                        builder: (context) => Details(
+                                              product: data[index],
+                                            )));
+                              },
                             );
                           },
                         ),

@@ -9,7 +9,7 @@ import 'package:http/http.dart ' as http;
 class Cartrepository {
   var data = [];
   List<CartModel> results = [];
-  String url = 'https://api1.sib3.nurulfikri.com/api/keranjang';
+  String url = 'https://aki.nurulfikri.com/api/keranjang';
   Future<List<CartModel>> getDataCart() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
@@ -36,6 +36,7 @@ class Cartrepository {
       'Authorization': 'Bearer $token',
     });
     final body = jsonDecode(resp.body);
+    return resp;
   }
 
   Future delCart(String? id) async {
