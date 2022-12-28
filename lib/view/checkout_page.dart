@@ -1,5 +1,5 @@
 import 'package:final_project/model/detail_product.dart';
-import 'package:final_project/view/detail_product_page.dart';
+import 'package:final_project/view/detail_product.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutPage extends StatelessWidget {

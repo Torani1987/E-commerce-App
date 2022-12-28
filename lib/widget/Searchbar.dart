@@ -2,8 +2,6 @@ import 'package:final_project/model/product_model.dart';
 import 'package:final_project/view/detail_product_page.dart';
 import 'package:final_project/view_model/get_product.dart';
 import 'package:flutter/material.dart';
-import 'package:final_project/model/cart_model.dart';
-import 'package:final_project/model/product_model.dart';
 
 class Search extends SearchDelegate {
   final FetchProduct _productsearch = FetchProduct();
@@ -46,12 +44,11 @@ class Search extends SearchDelegate {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
-                      builder: (c) => DetailProductPage(
-                        id: data[index].id!,
-                      ),
-                    ),
+                        builder: (context) =>
+                            DetailProductPage(product: data[index])),
                   );
                 },
                 child: Container(

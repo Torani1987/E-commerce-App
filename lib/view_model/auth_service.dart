@@ -32,11 +32,4 @@ class NetworkAuth {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
       };
-
-  _getCategory() async {
-    token = _getToken();
-    final response =
-        await http.get(Uri.parse('$_url/api/category'), headers: _setHeaders());
-    return response;
-  }
 }

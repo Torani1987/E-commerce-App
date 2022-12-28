@@ -1,42 +1,40 @@
-import 'package:final_project/view/transaction.dart';
+import 'dart:convert';
+
+import 'package:final_project/view/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../model/transaction_model.dart';
 
 class DetailTransaction extends StatefulWidget {
-  const DetailTransaction({super.key});
-
+  DetailTransaction({required this.transaction, super.key});
+  Transaction transaction;
   @override
   State<DetailTransaction> createState() => _DetailTransactionState();
 }
 
 class _DetailTransactionState extends State<DetailTransaction> {
+  String nama = '';
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const TransactionPage()),
-            );
-          },
-        ),
-        title: const Text(
+        title: Text(
           'Detail Transaction',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -45,15 +43,15 @@ class _DetailTransactionState extends State<DetailTransaction> {
             children: <Widget>[
               Container(
                 height: 28,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
                 ),
                 child: Row(
                   children: const [
                     SizedBox(
                       width: 6,
                       height: 14,
-                      child: ColoredBox(color: Color(0xFFF2B9542)),
+                      child: ColoredBox(color: Color(0xFF2b9542)),
                     ),
                     SizedBox(
                       width: 10,
@@ -80,56 +78,51 @@ class _DetailTransactionState extends State<DetailTransaction> {
                 ],
               ),
               const SizedBox(height: 10.0),
-              Container(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Center(
-                        child: Container(
-                          width: 60.0,
-                          height: 60.0,
-                          decoration: BoxDecoration(
-                            image: const DecorationImage(
-                              image: AssetImage("assets/images/sepatu.jpg"),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
+              Row(
+                children: [
+                  Container(
+                    width: 80.0,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 80.0,
+                        height: 80.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                widget.transaction.products[0].image),
+                            fit: BoxFit.cover,
                           ),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12.0),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          child: const Text(
-                            "Nike Air Jordan High Travis Scoot",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                  ),
+                  const SizedBox(width: 12.0),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        widget.transaction.products[0].name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(height: 12),
-                        Container(
-                          child: const Text(
-                            "1 item",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        "${widget.transaction.products[0].pivot.qty} item",
+                        style: const TextStyle(
+                          fontSize: 10,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const SizedBox(height: 12.0),
               Row(
@@ -146,20 +139,20 @@ class _DetailTransactionState extends State<DetailTransaction> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  const Text(
-                    "Rp. 33.999.000",
-                    style: TextStyle(
+                  Text(
+                    "Rp ${widget.transaction.total}",
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Spacer(),
-                  Container(
+                  SizedBox(
                     width: 90,
                     height: 35,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xff2B9542),
+                        backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -167,14 +160,18 @@ class _DetailTransactionState extends State<DetailTransaction> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const DetailTransaction()),
+                          MaterialPageRoute(
+                              builder: (context) => const MainPage()),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         "Buy Again",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -185,8 +182,8 @@ class _DetailTransactionState extends State<DetailTransaction> {
               ),
               Container(
                 height: 200.0,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFFF5F5F5),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -205,18 +202,18 @@ class _DetailTransactionState extends State<DetailTransaction> {
                       Column(
                         children: [
                           Row(
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Name",
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Color(0xfff808080),
+                                  color: Colors.grey,
                                 ),
                               ),
-                              SizedBox(width: 66),
+                              const SizedBox(width: 66),
                               Text(
-                                "Muhammad Torani",
-                                style: TextStyle(
+                                nama,
+                                style: const TextStyle(
                                   fontSize: 10,
                                   color: Colors.black,
                                 ),
@@ -229,18 +226,18 @@ class _DetailTransactionState extends State<DetailTransaction> {
                       Column(
                         children: [
                           Row(
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Address",
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Color(0xfff808080),
+                                  color: Color(0xff808080),
                                 ),
                               ),
-                              SizedBox(width: 55),
+                              const SizedBox(width: 55),
                               Text(
-                                "Buah Batu,Perum Bandung Indah No 24 Kota Bandung,Jawa Barat",
-                                style: TextStyle(
+                                widget.transaction.alamat,
+                                style: const TextStyle(
                                   fontSize: 10,
                                   color: Colors.black,
                                 ),
@@ -253,18 +250,18 @@ class _DetailTransactionState extends State<DetailTransaction> {
                       Column(
                         children: [
                           Row(
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Total Price",
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Color(0xfff808080),
+                                  color: Color(0xff808080),
                                 ),
                               ),
-                              SizedBox(width: 44),
+                              const SizedBox(width: 44),
                               Text(
-                                "33.999.000",
-                                style: TextStyle(
+                                widget.transaction.total.toString(),
+                                style: const TextStyle(
                                   fontSize: 10,
                                   color: Colors.black,
                                 ),
@@ -274,29 +271,6 @@ class _DetailTransactionState extends State<DetailTransaction> {
                         ],
                       ),
                       const SizedBox(height: 9),
-                      Column(
-                        children: [
-                          Row(
-                            children: const [
-                              Text(
-                                "Total Discount",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Color(0xfff808080),
-                                ),
-                              ),
-                              SizedBox(width: 27),
-                              Text(
-                                "1.299.000",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
                       const Divider(
                         color: Colors.black,
                       ),
@@ -304,15 +278,15 @@ class _DetailTransactionState extends State<DetailTransaction> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Total Shop",
                                 style: TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "32.700.00",
-                                style: TextStyle(
+                                widget.transaction.total.toString(),
+                                style: const TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold),
                               )
                             ],
@@ -328,5 +302,16 @@ class _DetailTransactionState extends State<DetailTransaction> {
         ),
       ),
     );
+  }
+
+  _loadUserData() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var user = jsonDecode(localStorage.getString('user')!);
+
+    if (user != null) {
+      setState(() {
+        nama = user['name'];
+      });
+    }
   }
 }

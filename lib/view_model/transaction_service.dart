@@ -21,9 +21,7 @@ class FetchTransaction {
       final body = jsonDecode(response.body);
       data = jsonDecode(jsonEncode(body['data']));
       results = data.map((e) => Transaction.fromJson(e)).toList();
-      print(data);
     } else {
-      print('api error');
     }
     return results;
   }
@@ -37,6 +35,5 @@ class FetchTransaction {
       'Authorization': 'Bearer $token',
     });
     final body = jsonDecode(resp.body);
-    print(body['info']);
   }
 }

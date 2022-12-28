@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:final_project/view/login_page.dart';
 
-import 'package:final_project/view/transaction.dart';
-import 'package:final_project/view/wishlist.dart';
+import 'package:final_project/view/transaction_page.dart';
+import 'package:final_project/view/wishlist_page.dart';
 import 'package:final_project/view_model/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -138,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => WishlistPage(),
+                      builder: (context) => const WishlistPage(),
                     ),
                   );
                 },
@@ -187,14 +186,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _logout() async {
-    var res = await NetworkAuth().getData('/api/auth/logout');
+    var res = await NetworkAuth().getData('/api/logout');
     if (res.statusCode == 200) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.remove('user');
       localStorage.remove('token');
       if (mounted) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, MaterialPageRoute(builder: (context) => const LoginPage()));
       }
     }
   }

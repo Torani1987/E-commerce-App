@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:final_project/model/category_model.dart';
 import 'package:final_project/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import '../model/cart_model.dart';
 
 class CategoryService {
   late Map<String, dynamic> data;
