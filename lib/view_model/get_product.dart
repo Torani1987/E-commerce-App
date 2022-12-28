@@ -10,7 +10,7 @@ class FetchProduct {
   var data = [];
   List<Product> results = [];
   Future<List<Product>> getDataProduct({String? query}) async {
-    const String url = 'https://api1.sib3.nurulfikri.com/api/barang';
+    const String url = 'https://aki.nurulfikri.com/api/barang';
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final response = await http.get(Uri.parse(url), headers: {
@@ -29,8 +29,7 @@ class FetchProduct {
                 element.name!.toLowerCase().contains(query.toLowerCase()))
             .toList();
       }
-    } else {
-    }
+    } else {}
     return results;
   }
 
@@ -39,7 +38,7 @@ class FetchProduct {
     // if (mapOfDetailProduct.containsKey(id)) {
     //   return mapOfDetailProduct[id]!;
     // } else {
-    final String url = 'https://api1.sib3.nurulfikri.com/api/barang/$id';
+    final String url = 'https://aki.nurulfikri.com/api/barang/$id';
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String token = await jsonDecode(localStorage.getString('token')!);
     final response = await http.get(Uri.parse(url), headers: {

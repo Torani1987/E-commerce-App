@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkAuth {
-  final String _url = 'https://api1.sib3.nurulfikri.com';
+  final String _url = 'https://aki.nurulfikri.com';
 
   String? token;
 

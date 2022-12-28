@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class WishlistRepository {
   var data = [];
   List<WishList> results = [];
-  String url = 'https://api1.sib3.nurulfikri.com/api/wishlist';
+  String url = 'https://aki.nurulfikri.com/api/wishlist';
 
   Future<List<WishList>> getDataWishlist() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();

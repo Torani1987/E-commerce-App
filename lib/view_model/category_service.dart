@@ -9,7 +9,7 @@ import '../model/cart_model.dart';
 class CategoryService {
   late Map<String, dynamic> data;
 
-  String url = 'https://api1.sib3.nurulfikri.com/api/category/';
+  String url = 'https://aki.nurulfikri.com/api/category/';
   late Category result;
   Future<Category> getProductByCategory(String idCategory) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
